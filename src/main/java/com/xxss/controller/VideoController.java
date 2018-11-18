@@ -43,11 +43,25 @@ public class VideoController {
 	
 	
 	//每播放一次记录IP
-		private static ConcurrentHashMap<String, Integer> playTimes = new ConcurrentHashMap<String, Integer>();
-		
-		
-		public static long dayEnd = getEndTime();
+	private static ConcurrentHashMap<String, Integer> playTimes = new ConcurrentHashMap<String, Integer>();
 	
+	
+	public static long dayEnd = getEndTime();
+	
+	
+		
+		
+	/**
+	 * 获取预览VIDEO	
+	 */
+	@RequestMapping("/video/getPreVideo")
+	@ResponseBody
+	public String getPreVideoUrl(String id,HttpServletRequest request) {
+		Video video = videoService.findById(id);
+		String preVideoUrl = CloudFront.getPreUrl(video.getVideopreview());
+		return preVideoUrl;
+	}
+		
 	
 	/**
 	 * 获取要播放的PRE-URL
@@ -153,5 +167,8 @@ public class VideoController {
 		}
 	}
 	
-	
+	public static void main(String[] args) {
+		System.out.println(CloudFront.getPreUrl("xvideos/2018-11-21/Superb Mature Lady (rebecca moore) Like And Ride Huge Mamba Cock Stud mov-23 8 min/preview.mp4"));
+		
+	}
 }
