@@ -210,7 +210,7 @@ public class AmazonS3Object {
 	public static List<S3ObjectSummary> getMp4VideoS3Object(List<S3ObjectSummary> list) {
 		List<S3ObjectSummary> mp4List = new ArrayList<S3ObjectSummary>();
 		for (S3ObjectSummary s3ObjectSummary : list) {
-			if (s3ObjectSummary.getKey().endsWith("mp4")||s3ObjectSummary.getKey().endsWith("mpg")) {
+			if (s3ObjectSummary.getKey().endsWith("mp4")&&!s3ObjectSummary.getKey().endsWith("preview.mp4")) {
 				mp4List.add(s3ObjectSummary);
 			}
 		}
@@ -291,7 +291,7 @@ public class AmazonS3Object {
 	 */
 	public static String getPreviewVideoKey(String key) {
 		String[] array = key.split("mp4", 0);
-		return array[0] + "/mp4/preview.mp4";
+		return array[0] + "preview.mp4";
 	}
 
 	/**
