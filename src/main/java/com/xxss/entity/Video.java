@@ -29,6 +29,18 @@ public class Video {
 	
 	public String preUrl;   //预播放的URL
 	
+	public String videopreview;
+	
+	
+	
+	public String getVideopreview() {
+		return videopreview;
+	}
+
+	public void setVideopreview(String videopreview) {
+		this.videopreview = videopreview;
+	}
+
 	public String getId() {
 		return id;
 	}

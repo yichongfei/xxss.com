@@ -16,6 +16,6 @@ public class S3Config {
 			"yanshe/","gangjiao/","qunjiao/","boduoyejieyi/","cangjingkong/","taoguhuilixiang/","AmeriIchinose/",
 			"LanaRHoades/","MiaKhalifa/","RileyReid/","Mia Malkova/","Brandi Love/","Adriana Chechik/","Nicole Aniston/",
 			"Lena Paul/","Lisa Ann/","mote/","nenmo/","Alexis Texas/","anjelica/","belle knox/","lushaonv/",
-			"china-better/"};
+			"china-better/","xvideos/"};
 	//public static final String[] KINDS = {"china-better/","china/","america/","japan/"};
 }

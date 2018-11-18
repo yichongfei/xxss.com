@@ -60,7 +60,7 @@ public class SpringContext implements ApplicationContextAware {
 		  AmazonS3Object S3 = new AmazonS3Object();
 		  
 		
-		  S3.saveVideo2DB(VideoService,"2018-11-06");
+		  S3.saveVideo2DB(VideoService,"2018-11-18");
 
 		
 		

@@ -229,6 +229,7 @@ public class AmazonS3Object {
 		Video video = new Video();
 		video.setId(UUID.randomUUID().toString());
 		video.setMp4Key(key);
+		video.setVideopreview(getPreviewVideoKey(key));
 		video.setPicKey(getPictureKey(key));
 		video.setAdmireTimes(0);
 		video.setPlayTimes(0);
@@ -279,6 +280,18 @@ public class AmazonS3Object {
 	public static String getPictureKey(String key) {
 		String[] array = key.split("mp4", 0);
 		return array[0] + "1.jpg";
+	}
+	
+	
+	/**
+	 * 获取previewVideo的KEY
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public static String getPreviewVideoKey(String key) {
+		String[] array = key.split("mp4", 0);
+		return array[0] + "/mp4/preview.mp4";
 	}
 
 	/**

@@ -63,7 +63,9 @@ public class VideoController {
 		Result result = new Result();
 		Video video = videoService.findById(id);
 		String preSignedURL = CloudFront.getPreUrl(video.getMp4Key());
+		String preVideoUrl = CloudFront.getPreUrl(video.getVideopreview());
 		video.setPreUrl(preSignedURL);
+		video.setVideopreview(preVideoUrl);
 		//会员观看不限制次数
 		if (account != null && account.getVipDeadline() > System.currentTimeMillis()) {
 			result.setObject(video);
