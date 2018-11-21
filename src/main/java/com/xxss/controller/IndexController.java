@@ -53,6 +53,11 @@ public class IndexController {
 		return "home-v1";
 	}
 	
+	@RequestMapping("/play")
+	public String play(Model model, HttpServletRequest request) {
+		return "home-v1";
+	}
+	
 	
 	
 	
