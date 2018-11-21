@@ -50,7 +50,7 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
-		return "index";
+		return "home-v1";
 	}
 	
 	
