@@ -211,4 +211,53 @@ jQuery(document).ready(function(jQuery){
         e.preventDefault();
     });
 
+    jQuery(".content .post").hover(
+    		function () {
+    			//<video id="example_video_1" class="video-js vjs-polyzor-skin"></video>
+    			var thobj = jQuery(this).find('.post-thumb');
+    			thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin"></video>');
+    			thobj.append('<div onclick=alert(12); style="z-index:9999;position:absolute;left:0px;top:0px;width:'+thobj.width()+'px;height:'+thobj.height()+'px"></div>');
+    			appendVideo(thobj.width(),thobj.height());
+    		},
+    		function () {
+    			player.dispose();
+    			jQuery('#example_video_1').remove();
+    		}
+    );
+    jQuery(".content .post").on("touchstart", function () {
+		//<video id="example_video_1" class="video-js vjs-polyzor-skin"></video>
+    	if(player){
+    		player.dispose();
+    		jQuery('#example_video_1').remove();
+    	}
+    	var thobj = jQuery(this).find('.post-thumb');
+		thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin"></video>');
+		thobj.append('<div onclick=alert(12); style="position:absolute;left:0px;top:0px;width:'+thobj.width()+'px;height:'+thobj.height()+'px">111</div>');
+		appendVideo(thobj.width(),thobj.height());
+	});
+
 });
+    var player;
+    function appendVideo(w,h){
+    	player = videojs("example_video_1", {
+    		"width":w+"px",
+    		"height":h+"px",
+    	    "poster":"",
+    	    "autoplay":true,
+    	    "controls": true,
+    	    "preload":true,
+    		"sources": [{
+    		      src: 'https://vjs.zencdn.net/v/oceans.mp4',
+    		      type: 'video/mp4'
+    		  }],
+
+    	}, function(){
+    	    this.on('loadeddata',function(){
+
+    	    })
+    	    this.on('ended',function(){
+
+    	    })
+    	});
+    }
+
