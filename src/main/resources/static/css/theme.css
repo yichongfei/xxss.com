@@ -1178,6 +1178,8 @@ input[type=checkbox]:checked + .customLabel:before {
     padding: 0; }
 .content .list-group .item {
   margin-bottom: 30px; }
+  .content .list-group .item .post .post-thumb .hover-posts{
+    background: rgba(0, 0, 0, 0.1) !important; }
   .content .list-group .item .post .post-thumb .hover-posts span i {
     font-size: 18px !important; }
 .content .list-group .grid-medium {

@@ -55,7 +55,7 @@ public class IndexController {
 	
 	@RequestMapping("/play")
 	public String play(Model model, HttpServletRequest request) {
-		return "home-v1";
+		return "paly";
 	}
 	
 	
