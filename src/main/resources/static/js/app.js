@@ -211,4 +211,80 @@ jQuery(document).ready(function(jQuery){
         e.preventDefault();
     });
 
+    jQuery(".content .post").hover(
+    		function () {
+    			//<video id="example_video_1" class="video-js vjs-polyzor-skin"></video>
+    			var thobj = jQuery(this).find('.post-thumb');
+    			thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
+    			appendVideo(thobj.width(),thobj.height());
+    		},
+    		function () {
+    			player.dispose();
+    			jQuery('#example_video_1').remove();
+    		}
+    );
+    jQuery(".content .post").on("touchstart", function () {
+    	if(player){
+    		player.dispose();
+    		jQuery('#example_video_1').remove();
+    	}
+    	var thobj = jQuery(this).find('.post-thumb');
+		thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
+		appendVideo(thobj.width(),thobj.height());
+	});
+
 });
+    var player;
+    function appendVideo(w,h){
+    	player = videojs("example_video_1", {
+    		"width":w+"px",
+    		"height":h+"px",
+    	    "poster":"",
+    	    "autoplay":true,
+    	    "controls": false,
+    	    "preload":true,
+    	    "loop":true,
+    		"sources": [{
+    		      src: 'https://vjs.zencdn.net/v/oceans.mp4',
+    		      type: 'video/mp4'
+    		  }],
+
+    	}, function(){
+    	    this.on('loadeddata',function(){
+
+    	    })
+    	    this.on('ended',function(){
+
+    	    })
+    	});
+    }
+    
+    
+    jQuery(document).ready(function(jQuery){
+    	//播放页面视频演示  	
+    	console.log(jQuery('#playcontent').height());
+    	if(jQuery('#example_video_1').length > 0){
+    		videojs("example_video_1", {
+    			"width":jQuery('#playcontent').outerWidth()+"px",
+    			"height":jQuery('#playcontent').outerHeight()+"px",
+    			"poster":"",
+    			"autoplay":true,
+    			"controls": true,
+    			"preload":true,
+    			"loop":true,
+    			"sources": [{
+    				src: 'https://vjs.zencdn.net/v/oceans.mp4',
+    				type: 'video/mp4'
+    			}],
+    			
+    		}, function(){
+    			this.on('loadeddata',function(){
+    				
+    			})
+    			this.on('ended',function(){
+    				
+    			})
+    		});
+    	}
+    });
+    
