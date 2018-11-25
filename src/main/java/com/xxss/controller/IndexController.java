@@ -59,20 +59,6 @@ public class IndexController {
 	}
 	
 	
-	
-	
-	/**
-	 * 获取左侧的导航
-	 * @param model
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/leftdh")
-	public String leftdh(Model model, HttpServletRequest request) {
-		return "leftdh";
-	}
-	
-	
 	/**
 	 * 获取header
 	 * @param model
@@ -83,6 +69,46 @@ public class IndexController {
 	public String header(Model model, HttpServletRequest request) {
 		return "header";
 	}
+	
+	
+	/**
+	 * 获取手机端header
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/mobileheader")
+	public String mobileheader(Model model, HttpServletRequest request) {
+		return "mobileheader";
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 跳转到上传视频页
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/submit-post")
+	public String submitpost(Model model, HttpServletRequest request) {
+		return "submit-post";
+	}
+	
+	/**
+	 * 跳转到注册页面
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/login-register")
+	public String loginregister(Model model, HttpServletRequest request) {
+		return "login-register";
+	}
+	
+	
 	
 	
 	
