@@ -93,7 +93,7 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping("/submit-post")
-	public String submitpost(Model model, HttpServletRequest request) {
+	public String submitPost(Model model, HttpServletRequest request) {
 		return "submit-post";
 	}
 	
@@ -104,9 +104,83 @@ public class IndexController {
 	 * @return
 	 */
 	@RequestMapping("/login-register")
-	public String loginregister(Model model, HttpServletRequest request) {
+	public String loginRegister(Model model, HttpServletRequest request) {
 		return "login-register";
 	}
+	
+	/**
+	 * 跳转到about me
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/profile-about-me")
+	public String profileAboutMe(Model model, HttpServletRequest request) {
+		return "profile-about-me";
+	}
+	
+	
+	/**
+	 * 跳转到profile-video
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/profile-video")
+	public String profileVideo(Model model, HttpServletRequest request) {
+		return "profile-video";
+	}
+	
+	
+	
+	/**
+	 * 跳转到profile-favorite
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/profile-favorite")
+	public String profileFavorite(Model model, HttpServletRequest request) {
+		return "profile-favorite";
+	}
+	
+	
+	/**
+	 * 跳转到profile-followers
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/profile-followers")
+	public String profileFollowers(Model model, HttpServletRequest request) {
+		return "profile-followers";
+	}
+	
+	
+	/**
+	 * 跳转到profile-comments
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/profile-comments")
+	public String profileComments(Model model, HttpServletRequest request) {
+		return "profile-comments";
+	}
+	
+	
+	/**
+	 * 跳转到profile-settings
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/profile-settings")
+	public String profileSettings(Model model, HttpServletRequest request) {
+		return "profile-settings";
+	}
+	
+	
 	
 	
 	
