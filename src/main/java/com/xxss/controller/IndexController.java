@@ -50,6 +50,11 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
+		Sort sort = new Sort(Direction.DESC, "uploadTime");
+		int page = 0, size = 8;
+		Pageable pageable = new PageRequest(page, size, sort);
+		List<Video> list = videoService.findBycategory(pageable, "xvideos");
+		model.addAttribute("xvideos", list);
 		return "home-v1";
 	}
 	

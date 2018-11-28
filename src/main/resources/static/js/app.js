@@ -215,8 +215,17 @@ jQuery(document).ready(function(jQuery){
     		function () {
     			//<video id="example_video_1" class="video-js vjs-polyzor-skin"></video>
     			var thobj = jQuery(this).find('.post-thumb');
-    			thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
-    			appendVideo(thobj.width(),thobj.height());
+    			var videoid =  jQuery(this).find('.post-thumb').attr("id");
+    			jQuery.ajax({
+    				url:"/video/getPreVideo",
+    				type:"post",
+    				data:{"id":videoid},
+    				success:function(preurl){
+    					thobj.append('<video  id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
+    	    			appendVideo(thobj.width(),thobj.height(),preurl);
+    				}
+    			})
+    			
     		},
     		function () {
     			player.dispose();
@@ -235,7 +244,7 @@ jQuery(document).ready(function(jQuery){
 
 });
     var player;
-    function appendVideo(w,h){
+    function appendVideo(w,h,preurl){
     	player = videojs("example_video_1", {
     		"width":w+"px",
     		"height":h+"px",
@@ -245,7 +254,7 @@ jQuery(document).ready(function(jQuery){
     	    "preload":true,
     	    "loop":true,
     		"sources": [{
-    		      src: 'https://vjs.zencdn.net/v/oceans.mp4',
+    		      src: preurl,
     		      type: 'video/mp4'
     		  }],
 
