@@ -238,8 +238,18 @@ jQuery(document).ready(function(jQuery){
     		jQuery('#example_video_1').remove();
     	}
     	var thobj = jQuery(this).find('.post-thumb');
-		thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
-		appendVideo(thobj.width(),thobj.height());
+    	var videoid =  jQuery(this).find('.post-thumb').attr("id");
+    	jQuery.ajax({
+			url:"/video/getPreVideo",
+			type:"post",
+			data:{"id":videoid},
+			success:function(preurl){
+				thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
+				appendVideo(thobj.width(),thobj.height(),preurl);
+				player.play();
+			}
+		})
+		
 	});
 
 });

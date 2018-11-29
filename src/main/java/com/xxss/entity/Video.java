@@ -27,11 +27,11 @@ public class Video {
 
 	public String owner;   //VIDEO的作者
 	
-	public String preUrl;   //预播放的URL
+	public String preUrl;   //预播放的URL,防盗链所用,有时间限制
 	
-	public String videopreview;
+	public String videopreview;//预览播放的URL
 	
-	
+	public String videoLong;//影片时长
 	
 	public String getVideopreview() {
 		return videopreview;
@@ -129,7 +129,14 @@ public class Video {
 	}
 	
 	
-	
+	public String getVideoLong() {
+		return videoLong;
+	}
+
+	public void setVideoLong(String videoLong) {
+		this.videoLong = videoLong;
+	}
+
 	@Override
 	public String toString() {
 		return "Video [id=" + id + ", title=" + title + ", mp4Key=" + mp4Key + ", picKey=" + picKey + ", uploadTime="

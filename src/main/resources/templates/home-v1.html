@@ -250,7 +250,7 @@
                         </div><!-- end carousel -->
                         <div class="row collapse">
                             <div class="large-12 columns text-center row-btn">
-                                <a href="categories.html" class="button radius">View All Categories</a>
+                                <a href="categories.html" class="button radius">查看所有分类</a>
                             </div>
                         </div>
                     </div>
@@ -295,21 +295,22 @@
                                                 <a href="/play" class="hover-posts">
 						                        </a>
                                                 <div class="video-stats clearfix">
-                                                    <div class="thumb-stats pull-left">
+                                                   <!-- 喜欢视频的次数 -->
+                                                   <!--  <div class="thumb-stats pull-left">
                                                         <i class="fa fa-heart"></i>
                                                         <span>506</span>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="thumb-stats pull-right">
                                                         <span>05:56</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play">There are many variations of passage.</a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
-                                                        <span><a href="#">admin</a></span>
+                                                        <span><a href="#" th:text=${video.owner}></a></span>
                                                     </p>
                                                     <p class="pull-left">
                                                         <i class="fa fa-clock-o"></i>
@@ -317,7 +318,7 @@
                                                     </p>
                                                     <p class="pull-left">
                                                         <i class="fa fa-eye"></i>
-                                                        <span>1,862K</span>
+                                                        <span th:text=${video.playTimes}><span>
                                                     </p>
                                                 </div>
                                                 <div class="post-summary">
@@ -564,7 +565,7 @@
                             </div>
                         </div>
                         <div class="text-center row-btn">
-                            <a class="button radius" href="all-video.html">View All Video</a>
+                            <a class="button radius" href="all-video.html">查看更多视频</a>
                         </div>
                     </div>
                 </div>
@@ -1187,7 +1188,7 @@
                             </div>
                         </div>
                         <div class="text-center row-btn">
-                            <a class="button radius" href="all-video.html">View All Video</a>
+                            <a class="button radius" href="all-video.html">查看更多视频</a>
                         </div>
                     </div>
                 </div>

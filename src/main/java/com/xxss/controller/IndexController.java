@@ -53,7 +53,7 @@ public class IndexController {
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
 		int page = 0, size = 8;
 		Pageable pageable = new PageRequest(page, size, sort);
-		List<Video> list = videoService.findBycategory(pageable, "xvideos");
+		List<Video> list = videoService.findBycategory(pageable, "x-china");
 		model.addAttribute("xvideos", list);
 		return "home-v1";
 	}
