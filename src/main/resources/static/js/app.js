@@ -281,7 +281,7 @@ jQuery(document).ready(function(jQuery){
     
     
     function goVideoPlay(element){
-    	var id=$(element).attr('data-id');
+    	var id=jQuery(element).attr('data-id');
     	if(id !== '' && id !== null){
     		window.location="/goVideoPlay?id="+id;
     	}
