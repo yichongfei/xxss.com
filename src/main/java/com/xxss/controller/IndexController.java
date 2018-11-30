@@ -46,22 +46,35 @@ public class IndexController {
 	@Autowired
 	private CardService cardService;
 	
+	//缓存
 	private List<Video> mostViewVideoList = new ArrayList<Video>();
 	
+	private List<Video> lolilist = new ArrayList<Video>();
+	
+	private List<Video> koreanlist = new ArrayList<Video>();
+	
+	private List<Video> chinalist = new ArrayList<Video>();
+	
+	private List<Video> teenlist = new ArrayList<Video>();
+	
+	private List<Video> lamalist = new ArrayList<Video>();
+	
+	private List<Video> gangjiaolist = new ArrayList<Video>();
 	
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
-		Sort sort = new Sort(Direction.DESC, "uploadTime");
-		Random rand = new Random();
-		int page =rand.nextInt(15) , size = 8;
-		Pageable pageable = new PageRequest(page, size, sort);
-		List<Video> lolilist = videoService.findBycategory(pageable, "x-loli");
+		
+		if(lolilist.size()==0||koreanlist.size()==0||chinalist.size()==0||gangjiaolist.size()==0||teenlist.size()==0||lamalist.size()==0) {
+			updateIndexCache();
+		}
+		
 		model.addAttribute("xloli", lolilist);
-		
-		List<Video> koreanlist = videoService.findBycategory(pageable, "x-korean");
 		model.addAttribute("xkorean", koreanlist);
-		
-		
+		model.addAttribute("xchina", chinalist);
+		model.addAttribute("xgangjiao", gangjiaolist);
+		model.addAttribute("xteen", teenlist);
+		model.addAttribute("xlama", lamalist);
+		model.addAttribute("mostview", mostViewVideoList);
 		
 		return "home-v1";
 	}
@@ -336,13 +349,30 @@ public class IndexController {
 		return result;
 
 	}
-	
+	/**
+	 * 更新最多播放的视频缓存
+	 */
 	public void updateMostViewCache() {
 		Sort sort = new Sort(Direction.DESC, "playTimes");
 		Random rand = new Random();
-		int page =rand.nextInt(15) , size = 4;
+		int page =rand.nextInt(15) , size = 10;
 		Pageable pageable = new PageRequest(page, size, sort);
 		mostViewVideoList = videoService.findAll(pageable).getContent();
 	}
 	
+	/**
+	 * 更新主页缓存
+	 */
+	public void updateIndexCache() {
+		Sort sort = new Sort(Direction.DESC, "uploadTime");
+		Random rand = new Random();
+		int page =rand.nextInt(15) , size = 8;
+		Pageable pageable = new PageRequest(page, size, sort);
+		lolilist = videoService.findBycategory(pageable, "x-loli");
+		koreanlist = videoService.findBycategory(pageable, "x-korean");
+		chinalist = videoService.findBycategory(pageable, "x-china");
+		lamalist = videoService.findBycategory(pageable, "x-lama");
+		teenlist = videoService.findBycategory(pageable, "x-teen");
+		gangjiaolist = videoService.findBycategory(pageable, "x-gangjiao");
+	}
 }
