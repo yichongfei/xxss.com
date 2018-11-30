@@ -24,7 +24,7 @@ jQuery(document).ready(function(jQuery){
             jQuery(this).children().removeClass("fa-search");
             jQuery(this).children().addClass("fa-times");
         }else{
-            jQuery(this).children().removeClass("fa-times");
+            jQuery(this).children().removeClass("fa-times");	
             jQuery(this).children().addClass("fa-search");
         }
         jQuery(this).toggleClass("search-active");
@@ -215,7 +215,7 @@ jQuery(document).ready(function(jQuery){
     		function () {
     			//<video id="example_video_1" class="video-js vjs-polyzor-skin"></video>
     			var thobj = jQuery(this).find('.post-thumb');
-    			var videoid =  jQuery(this).find('.post-thumb').attr("id");
+    			var videoid =  jQuery(this).find('.post-thumb').attr("data-id");
     			jQuery.ajax({
     				url:"/video/getPreVideo",
     				type:"post",
@@ -238,7 +238,7 @@ jQuery(document).ready(function(jQuery){
     		jQuery('#example_video_1').remove();
     	}
     	var thobj = jQuery(this).find('.post-thumb');
-    	var videoid =  jQuery(this).find('.post-thumb').attr("id");
+    	var videoid =  jQuery(this).find('.post-thumb').attr("data-id");
     	jQuery.ajax({
 			url:"/video/getPreVideo",
 			type:"post",
@@ -279,31 +279,31 @@ jQuery(document).ready(function(jQuery){
     }
     
     
-    jQuery(document).ready(function(jQuery){
-    	//播放页面视频演示  	
-    	console.log(jQuery('#playcontent').height());
-    	if(jQuery('#example_video_1').length > 0){
-    		videojs("example_video_1", {
-    			"width":jQuery('#playcontent').outerWidth()+"px",
-    			"height":jQuery('#playcontent').outerHeight()+"px",
-    			"poster":"",
-    			"autoplay":true,
-    			"controls": true,
-    			"preload":true,
-    			"loop":true,
-    			"sources": [{
-    				src: 'https://vjs.zencdn.net/v/oceans.mp4',
-    				type: 'video/mp4'
-    			}],
-    			
-    		}, function(){
-    			this.on('loadeddata',function(){
-    				
-    			})
-    			this.on('ended',function(){
-    				
-    			})
-    		});
-    	}
-    });
     
+    function goVideoPlay(element){
+    	var id=$(element).attr('data-id');
+    	if(id !== '' && id !== null){
+    		window.location="/goVideoPlay?id="+id;
+    	}
+    }
+    
+    
+    Date.prototype.format = function(format)
+	{
+	 var o = {
+	 "M+" : this.getMonth()+1, //month
+	 "d+" : this.getDate(),    //day
+	 "h+" : this.getHours(),   //hour
+	 "m+" : this.getMinutes(), //minute
+	 "s+" : this.getSeconds(), //second
+	 "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+	 "S" : this.getMilliseconds() //millisecond
+	 }
+	 if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+	 (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+	 for(var k in o)if(new RegExp("("+ k +")").test(format))
+	 format = format.replace(RegExp.$1,
+	 RegExp.$1.length==1 ? o[k] :
+	 ("00"+ o[k]).substr((""+ o[k]).length));
+	 return format;
+	}

@@ -1,6 +1,7 @@
 package com.xxss.controller;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -32,18 +33,20 @@ import com.xxss.entity.Video;
 @Controller
 public class VideoController {
 	@Autowired
-	private VideoService videoService;
+	private  VideoService videoService;
 
 	@Autowired
-	private AccountService accountService;
+	private  AccountService accountService;
 
 	@Autowired
-	private CardService cardService;
+	private  CardService cardService;
 	
 	
 	
 	//每播放一次记录IP
 	private static ConcurrentHashMap<String, Integer> playTimes = new ConcurrentHashMap<String, Integer>();
+	
+	private static ConcurrentHashMap<String, Video> videoCache = new ConcurrentHashMap<String,Video>();
 	
 	
 	public static long dayEnd = getEndTime();
@@ -57,8 +60,11 @@ public class VideoController {
 	@RequestMapping("/video/getPreVideo")
 	@ResponseBody
 	public String getPreVideoUrl(String id,HttpServletRequest request) {
-		Video video = videoService.findById(id);
-		String preVideoUrl = CloudFront.getPreUrl(video.getVideopreview());
+		//如果缓存为空,则更新缓存
+		if(videoCache.size()==0) {
+			getAllVideo();
+		}
+		String preVideoUrl = CloudFront.getPreUrl(videoCache.get(id).getVideopreview());
 		return preVideoUrl;
 	}
 		
@@ -164,6 +170,17 @@ public class VideoController {
 			videoService.saveAndFlush(video);
 		}
 	}
+	
+	/**
+	 * 将所有的视频文件放入缓存
+	 */
+	private  void getAllVideo() {
+		List<Video> findAll = videoService.findAll();
+		for (Video video : findAll) {
+			videoCache.put(video.getId(), video);
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		System.out.println(CloudFront.getPreUrl("xvideos/2018-11-21/Superb Mature Lady (rebecca moore) Like And Ride Huge Mamba Cock Stud mov-23 8 min/preview.mp4"));

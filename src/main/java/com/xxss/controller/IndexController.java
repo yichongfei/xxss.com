@@ -3,6 +3,7 @@ package com.xxss.controller;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -45,22 +46,24 @@ public class IndexController {
 	@Autowired
 	private CardService cardService;
 	
-	
+	private List<Video> mostViewVideoList = new ArrayList<Video>();
 	
 	
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
-		int page = 0, size = 8;
+		Random rand = new Random();
+		int page =rand.nextInt(15) , size = 8;
 		Pageable pageable = new PageRequest(page, size, sort);
-		List<Video> list = videoService.findBycategory(pageable, "x-china");
-		model.addAttribute("xvideos", list);
+		List<Video> lolilist = videoService.findBycategory(pageable, "x-loli");
+		model.addAttribute("xloli", lolilist);
+		
+		List<Video> koreanlist = videoService.findBycategory(pageable, "x-korean");
+		model.addAttribute("xkorean", koreanlist);
+		
+		
+		
 		return "home-v1";
-	}
-	
-	@RequestMapping("/play")
-	public String play(Model model, HttpServletRequest request) {
-		return "paly";
 	}
 	
 	
@@ -257,18 +260,19 @@ public class IndexController {
 	@RequestMapping("/goVideoPlay")
 	public String goVideoPlay(HttpServletRequest request, Model model,
 			@RequestParam(value = "id", required = false, defaultValue = "") String id) {
-		model.addAttribute("id", id);
+		Video video = videoService.findById(id);
 		Sort sort = new Sort(Direction.DESC, "playTimes");
 		Random ra =new Random();
-		Pageable pageable = new PageRequest(ra.nextInt(10)+1, 8, sort);
-		Page<Video> list = videoService.findAll(pageable);
+		Pageable pageable = new PageRequest(ra.nextInt(10)+1, 6, sort);
+		List<Video> list = videoService.findBycategory(pageable, video.getCategory());
+		if(mostViewVideoList.size()==0) {
+			updateMostViewCache();
+		}
+		
+		model.addAttribute("mostviewVideos",mostViewVideoList);
 		model.addAttribute("videos", list);
-		
-		
-		
-		
-		return "videoPlay";
-
+		model.addAttribute("video", video);
+		return "videoplay";
 	}
 	
 	
@@ -333,18 +337,12 @@ public class IndexController {
 
 	}
 	
-	/**
-	 * 跳转到塞子界面
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/saizi")
-	public String saizi(HttpServletRequest request) {
-
-		return "saizi";
-
+	public void updateMostViewCache() {
+		Sort sort = new Sort(Direction.DESC, "playTimes");
+		Random rand = new Random();
+		int page =rand.nextInt(15) , size = 4;
+		Pageable pageable = new PageRequest(page, size, sort);
+		mostViewVideoList = videoService.findAll(pageable).getContent();
 	}
-	
 	
 }

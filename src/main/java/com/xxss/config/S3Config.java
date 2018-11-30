@@ -9,9 +9,9 @@ public class S3Config {
 	
 	public static final String JAPAN = "japan";
 	
-	public static final String OWNER = "XXSS";
+	public static final String OWNER = "这里好玩不";
 	
-	public static final int playTimesForFree = 4;
+	public static final int playTimesForFree = 400;
 
-	public static final String[] KINDS = {"x-lama/","x-korean/"};
+	public static final String[] KINDS = {"x-teen/"};
 }
