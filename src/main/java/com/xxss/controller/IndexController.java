@@ -224,12 +224,12 @@ public class IndexController {
 		}
 
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
-		Pageable pageable = new PageRequest(page, 24, sort);
+		Pageable pageable = new PageRequest(page, 12, sort);
 		List<Video> list = videoService.findBycategory(pageable, category);
 		model.addAttribute("videos", list);
 		model.addAttribute("count", videoService.getCountByCategory(category));
 		model.addAttribute("curpage", page);
-		return "listmovies";
+		return "listVideo";
 	}
 	
 	
@@ -242,9 +242,10 @@ public class IndexController {
 	@RequestMapping("/listNewVideo/{page}")
 	public String listNewVideo(@PathVariable(value = "page") Integer page, Model model) {
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
-		Pageable pageable = new PageRequest(page, 24, sort);
+		Pageable pageable = new PageRequest(page, 12, sort);
 		Page<Video> list = videoService.findAll(pageable);
 		model.addAttribute("videos", list);
+		model.addAttribute("count", videoService.getCountRows());
 		model.addAttribute("countpage", list.getTotalPages());
 		model.addAttribute("curpage", page);
 		return "listNewVideo";
@@ -258,8 +259,9 @@ public class IndexController {
 	@RequestMapping("/listHotVideo/{page}")
 	public String listHotVideo(@PathVariable(value = "page") Integer page, Model model) {
 		Sort sort = new Sort(Direction.DESC, "playTimes");
-		Pageable pageable = new PageRequest(page, 24, sort);
+		Pageable pageable = new PageRequest(page, 12, sort);
 		Page<Video> list = videoService.findAll(pageable);
+		model.addAttribute("count", videoService.getCountRows());
 		model.addAttribute("videos", list);
 		model.addAttribute("countpage", list.getTotalPages());
 		model.addAttribute("curpage", page);

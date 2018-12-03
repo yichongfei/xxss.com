@@ -221,7 +221,7 @@ jQuery(document).ready(function(jQuery){
     				type:"post",
     				data:{"id":videoid},
     				success:function(preurl){
-    					thobj.append('<video  id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
+    					thobj.append('<video style="z-index:10000000" id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
     	    			appendVideo(thobj.width(),thobj.height(),preurl);
     				}
     			})
@@ -244,7 +244,7 @@ jQuery(document).ready(function(jQuery){
 			type:"post",
 			data:{"id":videoid},
 			success:function(preurl){
-				thobj.append('<video id="example_video_1" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"></video>');
+				thobj.append('<video id="example_video_1" style="z-index:1000" class="video-js vjs-polyzor-skin" playsinline data-setup="{}"  ></video>');
 				appendVideo(thobj.width(),thobj.height(),preurl);
 				player.play();
 			}

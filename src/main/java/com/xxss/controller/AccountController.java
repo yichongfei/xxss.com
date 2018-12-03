@@ -52,19 +52,6 @@ public class AccountController {
 	}
 	
 	
-	/**
-	 * 跳转到登录界面
-	 * 
-	 * @param email
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/goRegister")
-	public String goRegister(HttpServletRequest request) {
-		
-		return "register";
-
-	}
 	
 	
 	
@@ -80,16 +67,23 @@ public class AccountController {
 	@RequestMapping("/account/zhuce")
 	@ResponseBody
 	public Result register(String email, String password) {
-		Account findByemail = accountService.findByemail(email);
 		Result result = new Result();
+		if(email.equals("")||email==null) {
+			result.setSuccess(false);
+			result.setInformation("账号不能为空");
+			return result;
+		}
+		
+		Account findByemail = accountService.findByemail(email);
+		
 		if (findByemail == null) {
 			accountService.save(new Account(email, password));
 			result.setSuccess(true);
-			result.setInformation("注册成功,欢迎来到星辰社区");
+			result.setInformation("注册成功");
 			return result;
 		} else {
 			result.setSuccess(false);
-			result.setInformation("账号已存在,请您重新注册");
+			result.setInformation("账号已存在,请重新注册");
 			return result;
 		}
 
@@ -115,7 +109,7 @@ public class AccountController {
 			return result;
 		} else if (account.getPassword().equals(password)) {
 			result.setSuccess(true);
-			result.setInformation("登录成功,欢迎回来,祝您愉快,星辰社区永远陪伴您");
+			result.setInformation("登录成功,欢迎回来,祝您度过愉快的旅程");
 			result.setObject(account);
 			session.setAttribute("account", account);
 			return result;
@@ -144,7 +138,7 @@ public class AccountController {
 		Account account = new Account();
 		account.setEmail("游客");
 		session.setAttribute("account", account);
-		return "index";
+		return "home-v1";
 
 	}
 	

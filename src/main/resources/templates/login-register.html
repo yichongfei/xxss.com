@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeTube video</title>
+    <title>欢迎加入我们,最好的成人影视基地</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -16,7 +16,14 @@
     <link rel="stylesheet" href="css/jquery.kyco.easyshare.css">
     <link rel="stylesheet" href="css/responsive.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <style>
+    	@media screen and (min-width: 1200px) {
+	    #zhucedengluform{
+	    	position: relative;overflow: hidden;margin: auto;top:50%;left:35%
+	    }
+}
+    </style>
 </head>
 <body>
 <div class="off-canvas-wrapper">
@@ -30,7 +37,6 @@
           <div class="off-canvas-content" data-off-canvas-content>
 	            <header id="header">
 	                <script type="text/javascript">
-	               		 debugger;
 	                	$("#header").load("/header",function(){ jQuery(document).foundation();});
 	                </script>
 	            </header><!-- End Header -->
@@ -40,9 +46,9 @@
                     <div class="large-12 columns">
                         <nav aria-label="You are here:" role="navigation">
                             <ul class="breadcrumbs">
-                                <li><i class="fa fa-home"></i><a href="#">Home</a></li>
+                                <li><i class="fa fa-home"></i><a href="/">主页</a></li>
                                 <li>
-                                    <span class="show-for-sr">Current: </span> Register
+                                    <span class="show-for-sr">当前位置:</span> 注册
                                 </li>
                             </ul>
                         </nav>
@@ -53,72 +59,42 @@
             <!-- registration -->
             <section class="registration">
                 <div class="row secBg">
-                    <div class="large-12 columns">
+                    <div class="large-12 columns" style="background-color: #c3b7b7;">
                         <div class="login-register-content">
                             <div class="row collapse borderBottom">
                                 <div class="medium-6 large-centered medium-centered">
                                     <div class="page-heading text-center">
-                                        <h3>User Registeration</h3>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                        <h3>欢迎加入我们的大家庭</h3>
+                                        <p>我们旨在建立最好的色情影院,涵盖全国各地的精彩视频,后期将开发原创功能,对上传视频的色友,大加的奖励与鼓励,不光光是金钱上的支持.你一定不会后悔加入进来.</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row" data-equalizer data-equalize-on="medium" id="test-eq">
-                                <div class="large-4 large-offset-1 medium-6 columns">
-                                    <div class="social-login" data-equalizer-watch>
-                                        <h5 class="text-center">Login via Social Profile</h5>
-                                        <div class="social-login-btn facebook">
-                                            <a href="#"><i class="fa fa-facebook"></i>login via facebook</a>
-                                        </div>
-                                        <div class="social-login-btn twitter">
-                                            <a href="#"><i class="fa fa-twitter"></i>login via twitter</a>
-                                        </div>
-                                        <div class="social-login-btn g-plus">
-                                            <a href="#"><i class="fa fa-google-plus"></i>login via google plus</a>
-                                        </div>
-                                        <div class="social-login-btn linkedin">
-                                            <a href="#"><i class="fa fa-linkedin"></i>login via linkedin</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="large-2 medium-2 columns show-for-large">
-                                    <div class="middle-text text-center hide-for-small-only" data-equalizer-watch>
-                                        <p>
-                                            <i class="fa fa-arrow-left arrow-left"></i>
-                                            <span>OR</span>
-                                            <i class="fa fa-arrow-right arrow-right"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="large-4 medium-6 columns end">
-                                    <div class="register-form">
-                                        <h5 class="text-center">Create your Account</h5>
-                                        <form method="post" data-abide novalidate>
+                                <div  class="large-4 medium-6 columns end" id="zhucedengluform" >
+                                    <div class="register-form" >
+                                        <h5 class="text-center">创建您的账号</h5>
+                                        <form method="post" data-abide novalidate >
                                             <div data-abide-error class="alert callout" style="display: none;">
-                                                <p><i class="fa fa-exclamation-triangle"></i> There are some errors in your form.</p>
+                                                <p id="error"><i class="fa fa-exclamation-triangle"></i > 你输入的信息有误</p>
                                             </div>
-                                            <div class="input-group">
-                                                <span class="input-group-label"><i class="fa fa-user"></i></span>
-                                                <input class="input-group-field" type="text" placeholder="Enter your username" required>
-                                            </div>
-
+                                            
                                             <div class="input-group">
                                                 <span class="input-group-label"><i class="fa fa-envelope"></i></span>
-                                                <input class="input-group-field" type="email" placeholder="Enter your email" required>
+                                                <input class="input-group-field" type="email" id="email" placeholder="您的邮箱,用于保护您的账号" required>
                                             </div>
 
                                             <div class="input-group">
                                                 <span class="input-group-label"><i class="fa fa-lock"></i></span>
-                                                <input type="password" id="password" placeholder="Enter your password" required>
+                                                <input type="password" id="password" placeholder="输入密码" required>
                                             </div>
                                             <div class="input-group">
                                                 <span class="input-group-label"><i class="fa fa-lock"></i></span>
-                                                <input type="password" placeholder="Re-type your password" required pattern="alpha_numeric" data-equalto="password">
+                                                <input type="password" placeholder="请确认您的密码" required pattern="alpha_numeric" data-equalto="password">
                                             </div>
-                                            <span class="form-error">your email is invalid</span>
-                                            <button class="button expanded" type="submit" name="submit">register Now</button>
-                                            <p class="loginclick"> <a href="login.html">Login here</a><a href="login.html">Already have acoount?</a></p>
+                                            <span class="form-error">您的邮箱格式不正确</span>
+                                            <p class="loginclick"> <a href="/goLogin">登陆</a><a href="/goLogin">您已经拥有我们的账号</a></p>
                                         </form>
+                                        <button class="button expanded"  onclick="register()">注册</button>
                                     </div>
                                 </div>
                             </div>
@@ -231,7 +207,7 @@
                                         </span>
                                     </div>
                                     <div class="input">
-                                        <input type="email" id="email" placeholder="Enter your email addres" required >
+                                        <input type="email"  placeholder="Enter your email addres" required >
                                         <span class="form-error">
                                           I'm required!
                                         </span>
@@ -267,8 +243,9 @@
     </div><!--end off canvas wrapper inner-->
 </div><!--end off canvas wrapper-->
 <!-- script files -->
+<script src="commanjs/account.js"></script>
+<script src="commanjs/util.js"></script>
 <script src="bower_components/what-input/what-input.js"></script>
-<script src="bower_components/foundation-sites/dist/foundation.js"></script>
 <script src="js/jquery.showmore.src.js" type="text/javascript"></script>
 <script src="js/app.js"></script>
 <script src="layerslider/js/greensock.js" type="text/javascript"></script>
