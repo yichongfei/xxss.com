@@ -1,0 +1,315 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeTube video</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="layerslider/css/layerslider.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/jquery.kyco.easyshare.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <script type="text/javascript">
+    	function pay(){
+    		var email = jQuery("#email").val()
+    		var qrtype = jQuery("#qrtype").val()
+    		var viptype= jQuery("#viptype").val()
+    		console.log(email)
+    		console.log(qrtype)
+    		if(email=="游客"||email==''||email==null){
+    			alert("请您先登陆");
+    			return;
+    		}else{
+    			jQuery.ajax({
+        			url:"/account/chongzhivip",
+        			type:"post",
+        			data:{"email":email,"qrtype":qrtype,"viptype":viptype},
+        			success:function(data){
+        				jQuery("#f-merchant").val(data.merchant);
+        				jQuery("#f-qrtype").val(data.qrtype);
+        				jQuery("#f-customno").val(data.customno);
+        				jQuery("#f-money").val(data.money);
+        				jQuery("#f-sendtime").val(data.sendtime);
+        				jQuery("#f-notifyurl").val(data.notifyurl);
+        				jQuery("#f-backurl").val(data.backurl);
+        				jQuery("#f-risklevel").val("1");
+        				jQuery("#f-sign").val(data.sign);
+        				jQuery("#payForm").submit();
+        			}
+        		})
+    		}
+    		
+    	}
+    </script>
+</head>
+<body>
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <!--header-->
+        
+       <div class="off-canvas position-left light-off-menu" id="offCanvas-responsive" data-off-canvas>
+        		 <script type="text/javascript">
+                	$("#offCanvas-responsive").load("/mobileheader",function(){ jQuery(document).foundation();});
+                </script>
+          </div>
+          <div class="off-canvas-content" data-off-canvas-content>
+	            <header id="header">
+	                <script type="text/javascript">
+	                	$("#header").load("/header",function(){ jQuery(document).foundation();});
+	                </script>
+	            </header><!-- End Header -->
+            <!--breadcrumbs-->
+            <section id="breadcrumb">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <nav aria-label="You are here:" role="navigation">
+                            <ul class="breadcrumbs">
+                                <li><i class="fa fa-home"></i><a href="/">主页</a></li>
+                                <li>
+                                    <span class="show-for-sr">Current: </span> VIP充值
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </section><!--end breadcrumbs-->
+
+            <!-- profile top section -->
+            <div class="row">
+                <!-- left sidebar -->
+                <!-- right side content area -->
+                <div class="large-12 columns profile-inner">
+                    <!-- profile settings -->
+                    <section class="profile-settings">
+                        <div class="row secBg">
+                            <div class="large-12 columns">
+                                <div class="heading">
+                                    <i class="fa fa-gears"></i>
+                                    <h4>成为VIP</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div class="setting-form">
+                                            <form method="post">
+                                                <div class="setting-form-inner">
+                                                    <div class="row">
+                                                        <div class="large-12 columns">
+                                                            <h6 class="borderBottom">本站VIP介绍</h6>
+                                                            <h6 class="borderBottom">1.本站VIP会员,可无限制观影!尽情体验!</h6>
+                                                            <h6 class="borderBottom">2.本站VIP会员,即可关闭所有广告!清爽体验!</h6>
+                                                            <h6 class="borderBottom">3.本站VIP年费会员,专业经纪人1对1服务,可免押金约炮,全国一二线城市上门服务</h6>
+                                                            <h6 class="borderBottom">更多功能,敬请期待,良心小站,认真做事,期待您的光临</h6>
+                                                        </div>
+                                                        <div class="medium-12 columns">
+                                                            <label>您的账号,请确保您的账号正确
+                                                                <input id="email" type="text" th:value=${session.account.email}  disabled="disabled"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="medium-12 columns">
+                                                            <label>选择您要充值的会员
+                                                               <select id="viptype">
+                                                               		<option value="onemonth">30天会员,58元</option>	
+	                                                                <option value="threemonth">90天会员,138元</option>
+	                                                                <option value="sixmonth">180天会员,238元</option>
+	                                                                <option value="twelevemonth">年费会员,365元,享专属经纪人服务</option>
+                                                               </select>
+                                                            </label>
+                                                        </div>
+                                                        <div class="medium-12 columns">
+                                                            <label>选择您的支付方式(暂时支持支付宝支付)
+                                                               <select id="qrtype">
+                                                               		<option value="aph5">支付宝(适合手机端用户)</option>	
+                                                               		<option value="ap">支付宝扫码(适合电脑端用户)</option>
+                                                               </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form id="payForm" action="https://www.citysy.com/api/v3/cashier.php" method="post" >
+												<input type="text" name="merchant" id="f-merchant" >
+												<input type="text" name="qrtype"  id="f-qrtype">
+												<input type="text" name="customno" id="f-customno">
+												<input type="text" name="money" id="f-money">
+												<input type="text" name="sendtime" id="f-sendtime">
+												<input type="text" name="notifyurl" id="f-notifyurl">
+												<input type="text" name="backurl" id="f-backurl">
+												<input type="text" name="risklevel" id="f-risklevel">
+												<input type="text" name="sign" id="f-sign" >
+											</form>
+                                             <div class="setting-form-inner">
+                                                    <button class="button expanded"  name="setting" onclick="pay()">现在购买</button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section><!-- End profile settings -->
+                </div><!-- end left side content area -->
+            </div>
+			
+			
+            <!-- footer -->
+            <footer>
+                <div class="row">
+                    <div class="large-3 medium-6 columns">
+                        <div class="widgetBox">
+                            <div class="widgetTitle">
+                                <h5>About Betube</h5>
+                            </div>
+                            <div class="textwidget">
+                                Betube video wordpress theme lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s book.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="large-3 medium-6 columns">
+                        <div class="widgetBox">
+                            <div class="widgetTitle">
+                                <h5>Recent Videos</h5>
+                            </div>
+                            <div class="widgetContent">
+                                <div class="media-object">
+                                    <div class="media-object-section">
+                                        <div class="recent-img">
+                                            <img src= "http://placehold.it/80x80" alt="recent">
+                                            <a href="#" class="hover-posts">
+                                                <span><i class="fa fa-play"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media-object-section">
+                                        <div class="media-content">
+                                            <h6><a href="#">The lorem Ipsumbeen the industry's standard.</a></h6>
+                                            <p><i class="fa fa-user"></i><span>admin</span><i class="fa fa-clock-o"></i><span>5 january 16</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media-object">
+                                    <div class="media-object-section">
+                                        <div class="recent-img">
+                                            <img src= "http://placehold.it/80x80" alt="recent">
+                                            <a href="#" class="hover-posts">
+                                                <span><i class="fa fa-play"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media-object-section">
+                                        <div class="media-content">
+                                            <h6><a href="#">The lorem Ipsumbeen the industry's standard.</a></h6>
+                                            <p><i class="fa fa-user"></i><span>admin</span><i class="fa fa-clock-o"></i><span>5 january 16</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media-object">
+                                    <div class="media-object-section">
+                                        <div class="recent-img">
+                                            <img src= "http://placehold.it/80x80" alt="recent">
+                                            <a href="#" class="hover-posts">
+                                                <span><i class="fa fa-play"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="media-object-section">
+                                        <div class="media-content">
+                                            <h6><a href="#">The lorem Ipsumbeen the industry's standard.</a></h6>
+                                            <p><i class="fa fa-user"></i><span>admin</span><i class="fa fa-clock-o"></i><span>5 january 16</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="large-3 medium-6 columns">
+                        <div class="widgetBox">
+                            <div class="widgetTitle">
+                                <h5>Tags</h5>
+                            </div>
+                            <div class="tagcloud">
+                                <a href="#">3D Videos</a>
+                                <a href="#">Videos</a>
+                                <a href="#">HD</a>
+                                <a href="#">Movies</a>
+                                <a href="#">Sports</a>
+                                <a href="#">3D</a>
+                                <a href="#">Movies</a>
+                                <a href="#">Animation</a>
+                                <a href="#">HD</a>
+                                <a href="#">Music</a>
+                                <a href="#">Recreation</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="large-3 medium-6 columns">
+                        <div class="widgetBox">
+                            <div class="widgetTitle">
+                                <h5>Subscribe Now</h5>
+                            </div>
+                            <div class="widgetContent">
+                                <form data-abide novalidate method="post">
+                                    <p>Subscribe to get exclusive videos</p>
+                                    <div class="input">
+                                        <input type="text" placeholder="Enter your full Name" required>
+                                        <span class="form-error">
+                                            Yo, you had better fill this out, it's required.
+                                        </span>
+                                    </div>
+                                    <div class="input">
+                                        <input type="email" id="email" placeholder="Enter your email addres" required >
+                                        <span class="form-error">
+                                          I'm required!
+                                        </span>
+                                    </div>
+                                    <button class="button" type="submit" value="Submit">Sign up Now</button>
+                                </form>
+                                <div class="social-links">
+                                    <h5>We’re a Social Bunch</h5>
+                                    <a class="secondary-button" href="#"><i class="fa fa-facebook"></i></a>
+                                    <a class="secondary-button" href="#"><i class="fa fa-twitter"></i></a>
+                                    <a class="secondary-button" href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a class="secondary-button" href="#"><i class="fa fa-instagram"></i></a>
+                                    <a class="secondary-button" href="#"><i class="fa fa-vimeo"></i></a>
+                                    <a class="secondary-button" href="#"><i class="fa fa-youtube"></i></a>
+                                    <a class="secondary-button" href="#"><i class="fa fa-flickr"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" id="back-to-top" title="Back to top"><i class="fa fa-angle-double-up"></i></a>
+            </footer><!-- footer -->
+            <div id="footer-bottom">
+                <div class="logo text-center">
+                    <img src="images/footerlogo.png" alt="footer logo">
+                </div>
+                <div class="btm-footer-text text-center">
+                    <p>2016 © Betube video wordpress theme.</p>
+                </div>
+            </div>
+        </div><!--end off canvas content-->
+    </div><!--end off canvas wrapper inner-->
+</div><!--end off canvas wrapper-->
+<!-- script files -->
+<script src="/commanjs/account.js"></script>
+<script src="/commanjs/util.js"></script>
+<script src="bower_components/what-input/what-input.js"></script>
+<script src="js/jquery.showmore.src.js" type="text/javascript"></script>
+<script src="js/app.js"></script>
+<script src="layerslider/js/greensock.js" type="text/javascript"></script>
+<!-- LayerSlider script files -->
+<script src="layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
+<script src="layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/inewsticker.js" type="text/javascript"></script>
+<script src="js/jquery.kyco.easyshare.js" type="text/javascript"></script>
+</body>
+</html>

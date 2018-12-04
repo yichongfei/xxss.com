@@ -1,6 +1,8 @@
 package com.xxss.controller;
 
 import java.io.File;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,11 +18,15 @@ import com.xxss.config.BBSconfig;
 import com.xxss.config.S3Config;
 import com.xxss.dao.AccountService;
 import com.xxss.dao.CardService;
+import com.xxss.dao.PayService;
 import com.xxss.dao.VideoService;
 import com.xxss.entity.Account;
 import com.xxss.entity.Card;
+import com.xxss.entity.Pay;
+import com.xxss.entity.PayArgs;
 import com.xxss.entity.Result;
 import com.xxss.util.ImgUtil;
+import com.xxss.util.PayUtil;
 
 @Controller
 public class AccountController {
@@ -35,7 +41,8 @@ public class AccountController {
 	@Autowired
 	private CardService cardService;
 	
-	
+	@Autowired
+	private PayService payService;
 	
 	/**
 	 * 跳转到登录界面
@@ -124,6 +131,7 @@ public class AccountController {
 	}
 	
 	
+	
 	/**
 	 * 退出登录
 	 * 
@@ -181,82 +189,27 @@ public class AccountController {
 		session.setAttribute("account", account);
 	}
 	
-	
-	
-	
 	@RequestMapping("/account/chongzhivip")
 	@ResponseBody
-	public Result chongzhivip(String email, String key, String secret, HttpServletRequest request) {
-		Result result = new Result();
-		Account account = accountService.findByemail(email);
-		if (account == null) {
-			result.setSuccess(false);
-			result.setInformation("账号不存在");
-			return result;
-		}
-
-		if (!key.equals("") && !secret.equals("")) {
-			Card card = cardService.findBykeyWords(key);
-			if (card != null && card.getSecret().equals(secret) && card.isAvailable() == true) {
-				account.updateVip(card);
-				accountService.saveAndFlush(account);
-				card.setAvailable(false);
-				cardService.saveAndFlush(card);
-				result.setSuccess(true);
-				result.setObject(account);
-				result.setInformation("充值VIP " + card.getMonths() + "个月成功");
-				HttpSession session = request.getSession();
-				session.setAttribute("account", account);// 更新session中账户信息
-				return result;
-			}
-		}
-		result.setSuccess(false);
-		result.setInformation("充值失败,请查看卡密是否准确,如有疑问,请联系客服QQ");
-
-		return result;
+	public PayArgs chongzhivipByh5(String email,String qrtype,String viptype, HttpServletRequest request) {
+		String customno = UUID.randomUUID().toString().replace("-", "").substring(3,10);
+		Pay pay = new Pay();
+		pay.setId(customno);
+		pay.setQyType(qrtype);
+		pay.setEmail(email);
+		pay.setVipType(viptype);
+		pay.setSendTime(System.currentTimeMillis()/1000l);
+		pay.setStatus("0");
+		payService.save(pay);
+		
+		PayArgs payArgs = PayUtil.getPayArgs(pay);
+		
+		
+		return payArgs;
 
 	}
-	@RequestMapping("/account/chongzhisupervip")
-	@ResponseBody
-	public Result chongzhisupervip(String email, String key, String secret, HttpServletRequest request) {
-		Result result = new Result();
-		Account account = accountService.findByemail(email);
-		if (account == null) {
-			result.setSuccess(false);
-			result.setInformation("账号不存在");
-			return result;
-		}
-		
-		if (!key.equals("") && !secret.equals("")) {
-			Card card = cardService.findBykeyWords(key);
-			if(card.getMonths()!=240) {
-				result.setSuccess(false);
-				result.setInformation("这不是超级会员点卡");
-				return result;
-			}
-			
-			
-			
-			if (card != null && card.getSecret().equals(secret) && card.isAvailable() == true) {
-				account.updateVip(card);
-				account.setSuperaccount("尊贵的超级会员");
-				accountService.saveAndFlush(account);
-				card.setAvailable(false);
-				cardService.saveAndFlush(card);
-				result.setSuccess(true);
-				result.setObject(account);
-				result.setInformation("充值VIP " + card.getMonths() + "个月成功");
-				HttpSession session = request.getSession();
-				session.setAttribute("account", account);// 更新session中账户信息
-				return result;
-			}
-		}
-		result.setSuccess(false);
-		result.setInformation("充值失败,请查看卡密是否准确,如有疑问,请联系客服QQ");
-		
-		return result;
-		
-	}
+	
+	
 	
 	
 	

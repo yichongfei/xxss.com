@@ -1,14 +1,6 @@
 <section id="top" class="topBar show-for-large">
       <div class="row">
           <div class="medium-6 columns">
-              <div class="socialLinks">
-                  <a href="#"><i class="fa fa-facebook-f"></i></a>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                  <a href="#"><i class="fa fa-google-plus"></i></a>
-                  <a href="#"><i class="fa fa-instagram"></i></a>
-                  <a href="#"><i class="fa fa-vimeo"></i></a>
-                  <a href="#"><i class="fa fa-youtube"></i></a>
-              </div>
           </div>
           <div class="medium-6 columns">
               <div class="top-button">
@@ -17,10 +9,13 @@
                           <a href="submit-post" th:text=${session.account.email} data-toggle="example-dropdown1"></a>
                       </li>
                       <li th:if="${session.account.email} !='游客'">
-                          <a href="javascript:void(0)" onclick="exit()">退出</a>
+                          <a href="/chongzhi" >购买VIP</a>
                       </li>
-                      <li>
-                          <a href="submit-post">上传视频</a>
+                      <!-- <li th:if="${session.account.email} !='游客'" >
+                      	  <a href="/chongzhi"><i>VIP到期时间 <span  th:text=${session.account.vipDeadline}></span></i></a>
+                      </li> -->
+                       <li th:if="${session.account.email} !='游客'">
+                          <a href="javascript:void(0)" onclick="exit()">退出</a>
                       </li>
                       <li class="dropdown-login" th:if="${session.account.email} =='游客'">
                           <a class="loginReg" data-toggle="example-dropdown" href="#">注册/登陆</a>
@@ -33,7 +28,7 @@
                                   </div>
                                   <div class="input-group">
                                       <span class="input-group-label"><i class="fa fa-lock"></i></span>
-                                      <input class="input-group-field" type="text" id="password" placeholder="输入您的密码">
+                                      <input class="input-group-field" type="password" id="password" placeholder="输入您的密码">
                                   </div>
                                   <div class="checkbox">
                                       <input id="check1" type="checkbox" name="check" value="check">
@@ -80,10 +75,10 @@
                                 <a href="/"><i class="fa fa-home"></i>主页</a>
                             </li>
                             <li class="has-submenu" data-dropdown-menu="example0">
-                                <a href="#"><i class="fa fa-film"></i>最佳视频</a>
+                                <a href="#"><i class="fas fa-video"></i>最佳视频</a>
                                 <ul class="submenu menu vertical" data-submenu data-animate="slide-in-down slide-out-up">
-                                    <li><a href="/listVideo/x-best201810/0"><i class="fa fa-film"></i>2018年10月最佳视频</a></li>
-                                    <li><a href="/listVideo/x-best201811/0"><i class="fa fa-film"></i>2018年11月最佳视频</a></li>
+                                    <li><a href="/listVideo/x-best201810/0"><i class="fas fa-video"></i>2018年10月最佳视频</a></li>
+                                    <li><a href="/listVideo/x-best201811/0"><i class="fas fa-video"></i>2018年11月最佳视频</a></li>
                                 </ul>
                             </li>
                             <li class="has-submenu" data-dropdown-menu="example1">

@@ -117,7 +117,16 @@ public class IndexController {
 	}
 	
 	
-	
+	/**
+	 * 加载footer
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/footer")
+	public String footer(Model model, HttpServletRequest request) {
+		return "footer";
+	}
 	
 	
 	/**
