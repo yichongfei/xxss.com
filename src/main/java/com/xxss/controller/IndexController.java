@@ -61,13 +61,15 @@ public class IndexController {
 	
 	private List<Video> gangjiaolist = new ArrayList<Video>();
 	
+	private List<Video> zhubolist = new ArrayList<Video>();
+	
 	@RequestMapping("/")
 	public String index(Model model, HttpServletRequest request) {
 		
 		if(lolilist.size()==0||koreanlist.size()==0||chinalist.size()==0||gangjiaolist.size()==0||teenlist.size()==0||lamalist.size()==0) {
 			updateIndexCache();
 		}
-		
+		model.addAttribute("xzhubo", zhubolist);
 		model.addAttribute("xloli", lolilist);
 		model.addAttribute("xkorean", koreanlist);
 		model.addAttribute("xchina", chinalist);
@@ -89,6 +91,17 @@ public class IndexController {
 	@RequestMapping("/header")
 	public String header(Model model, HttpServletRequest request) {
 		return "header";
+	}
+	
+	/**
+	 * 加载分类导航条
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/fenleidh")
+	public String fenleidh(Model model, HttpServletRequest request) {
+		return "fenleidh";
 	}
 	
 	
@@ -368,7 +381,7 @@ public class IndexController {
 	public void updateIndexCache() {
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
 		Random rand = new Random();
-		int page =rand.nextInt(15) , size = 8;
+		int page =rand.nextInt(5) , size = 8;
 		Pageable pageable = new PageRequest(page, size, sort);
 		lolilist = videoService.findBycategory(pageable, "x-loli");
 		koreanlist = videoService.findBycategory(pageable, "x-korean");
@@ -376,5 +389,6 @@ public class IndexController {
 		lamalist = videoService.findBycategory(pageable, "x-lama");
 		teenlist = videoService.findBycategory(pageable, "x-teen");
 		gangjiaolist = videoService.findBycategory(pageable, "x-gangjiao");
+		zhubolist = videoService.findBycategory(pageable, "x-zhubo");
 	}
 }

@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "video")
+@Table(name = "xvideo")
 public class Video {
 
 	@Id
