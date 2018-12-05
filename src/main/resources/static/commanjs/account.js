@@ -11,15 +11,44 @@ function register(){
 			data:{"email":email,"password":password},
 			success:function(data){
 				if(data.success == false){
-					alert(data.information);
+					alert(data.information)
+					window.location.href="/login-register"
 				}else{
-					alert(data.information+",请您登录")
-					//window.location.href="/goLogin";
+					if(confirm(data.information+" 点击直接登录")){
+						loginSS(email,password)
+					}
+					
 				}
 			}
 		});
 	}
 }
+
+//登录
+function loginSS(email,password){
+		jQuery.ajax({
+			url:"/account/login",
+			data:{"email":email,"password":password},
+			success:function(data){
+				if(data.success == false){
+					alert(data.information);
+				}else{
+					//如果登录成功,显示退出按钮,隐藏登录注册按钮
+					alert(data.information);
+					window.location.href="/";
+				}
+			}
+		});
+	}
+
+
+
+
+
+
+
+
+
 
 //登录
 function login(){
@@ -48,8 +77,8 @@ function login(){
 
 //登录
 function loginByHeader(){
-	var email = jQuery("#email").val();
-	var password = jQuery("#password").val();
+	var email = jQuery("#email1").val();
+	var password = jQuery("#password1").val();
 	
 	if(email == ''|| password ==''){
 		alert("账号或者密码不能为空");
