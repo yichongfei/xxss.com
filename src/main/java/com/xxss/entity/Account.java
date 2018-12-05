@@ -108,9 +108,9 @@ public class Account {
 	 */
 	public void updateVip(Pay pay) {
 		if (this.vipDeadline < System.currentTimeMillis()) {
-			this.vipDeadline = System.currentTimeMillis() + Integer.valueOf(pay.getVipType())*30*24*60*60*1000;
+			this.vipDeadline = System.currentTimeMillis() + Long.valueOf(pay.getVipType())*30*24*60*60*1000;
 		}else {
-			this.vipDeadline = this.vipDeadline + Integer.valueOf(pay.getVipType())*30*24*60*60*1000;
+			this.vipDeadline = this.vipDeadline + Long.valueOf(pay.getVipType())*30*24*60*60*1000;
 		}
 		this.vip = true;
 	}
