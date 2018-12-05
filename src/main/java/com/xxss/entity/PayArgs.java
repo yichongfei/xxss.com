@@ -11,7 +11,7 @@ public class PayArgs {
 	
 	private String customno;
 	
-	private Double money;
+	private int money;
 	
 	private long sendtime;
 	
@@ -47,11 +47,11 @@ public class PayArgs {
 		this.customno = customno;
 	}
 
-	public Double getMoney() {
+	public int getMoney() {
 		return money;
 	}
 
-	public void setMoney(Double money) {
+	public void setMoney(int money) {
 		this.money = money;
 	}
 

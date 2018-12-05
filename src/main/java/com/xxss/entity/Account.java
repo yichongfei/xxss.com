@@ -91,13 +91,26 @@ public class Account {
 	
 	
 	/**
-	 * 用户升级VIP
+	 * 用户升级VIP,通过card
 	 */
 	public void updateVip(Card card) {
 		if (this.vipDeadline < System.currentTimeMillis()) {
 			this.vipDeadline = System.currentTimeMillis() + card.getMonthsMillisecond();
 		}else {
 			this.vipDeadline = this.vipDeadline + card.getMonthsMillisecond();
+		}
+		this.vip = true;
+	}
+	
+	
+	/**
+	 * 用户升级VIP通过支付宝充值
+	 */
+	public void updateVip(Pay pay) {
+		if (this.vipDeadline < System.currentTimeMillis()) {
+			this.vipDeadline = System.currentTimeMillis() + Integer.valueOf(pay.getVipType())*30*24*60*60*1000;
+		}else {
+			this.vipDeadline = this.vipDeadline + Integer.valueOf(pay.getVipType())*30*24*60*60*1000;
 		}
 		this.vip = true;
 	}

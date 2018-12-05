@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.omg.CORBA.INTERNAL;
+
 import com.amazonaws.util.Md5Utils;
 import com.xxss.entity.Pay;
 import com.xxss.entity.PayArgs;
@@ -15,20 +17,20 @@ public class PayUtil {
 	public static final String merchant = "TC18120218066";
 	
 	//回调通知函数
-	public static final String notifyurl = "http://52.88.80.214:9999/chongzhi/getstatus";
+	public static final String notifyurl = "http://52.88.80.214:9999/chongzhi/result";
 	
 	public static final String backurl = "http://52.88.80.214:9999/chongzhi";
 	
 	public static final String md5key = "385258d9fb9242444232d2fccfa3514e";
 	
 	
-	public static final Map<String,Double> vipType = new HashMap<String,Double>();
+	public static final Map<String,Integer> vipType = new HashMap<String,Integer>();
 	
 	static {
-		vipType.put("onemonth", 0.01);
-		vipType.put("threemonth", 0.01);
-		vipType.put("sixmonth", 0.01);
-		vipType.put("twelvemonth", 0.01);
+		vipType.put("1", 10);
+		vipType.put("3", 10);
+		vipType.put("6", 10);
+		vipType.put("12", 10);
 	}
 	
 	

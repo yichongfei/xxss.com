@@ -13,5 +13,5 @@ public class S3Config {
 	
 	public static final int playTimesForFree = 400;
 
-	public static final String[] KINDS = {"x-mote/"};
+	public static final String[] KINDS = {"x-best201808/"};
 }
