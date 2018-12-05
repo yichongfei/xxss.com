@@ -128,6 +128,17 @@ public class IndexController {
 		return "footer";
 	}
 	
+	/**
+	 * 加载rightaside
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/rightaside")
+	public String rightaside(Model model, HttpServletRequest request) {
+		return "rightaside";
+	}
+	
 	
 	/**
 	 * 跳转到上传视频页

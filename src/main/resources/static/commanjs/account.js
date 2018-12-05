@@ -132,8 +132,10 @@ function goPublishArticle(){
 	window.location.href = "/bbs/goPublishArticle";
 }
 
-
-
+//跳转到注册界面
+function goRegister(){
+	window.location.href = "/login-register";
+}
 
 
 
