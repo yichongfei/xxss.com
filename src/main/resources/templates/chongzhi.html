@@ -114,6 +114,11 @@
                                                             </label>
                                                         </div>
                                                         <div class="medium-12 columns">
+                                                            <label>你的VIP到期时间,如果小于当前时间,则已过期.
+                                                                <input class="vipdeadline" type="text" th:attr="longtime=${session.account.vipDeadline}" disabled="disabled"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="medium-12 columns">
                                                             <label>选择您要充值的会员
                                                                <select id="viptype">
                                                                		<option value="1">30天会员,58元</option>	
@@ -311,5 +316,15 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/inewsticker.js" type="text/javascript"></script>
 <script src="js/jquery.kyco.easyshare.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+jQuery(".vipdeadline").each(function(){
+	jQuery(this).val(new Date(jQuery(this).attr('longtime')*1).format('yyyy-MM-dd'));
+});
+</script>
+
+
+
+
 </body>
 </html>
