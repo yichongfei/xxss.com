@@ -226,6 +226,7 @@ public class AccountController {
 		Pay pay = payService.findByid(customno);
 		Account account = accountService.findByemail(pay.getEmail());
 		account.updateVip(pay);
+		accountService.saveAndFlush(account);
 		System.out.println("更新成功");
 	}
 	
