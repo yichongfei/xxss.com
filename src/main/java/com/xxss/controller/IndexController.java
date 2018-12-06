@@ -162,6 +162,20 @@ public class IndexController {
 		return "login-register";
 	}
 	
+	
+	/**
+	 * 跳转到关于我们界面
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/about-us")
+	public String aboutus(Model model, HttpServletRequest request) {
+		return "about-us";
+	}
+	
+	
+	
 	/**
 	 * 跳转到about me
 	 * @param model

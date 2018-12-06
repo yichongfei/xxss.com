@@ -58,13 +58,12 @@ public class SpringContext implements ApplicationContextAware {
 		  VideoService VideoService= ctx.getBean(VideoService.class);
 		  
 		  AmazonS3Object S3 = new AmazonS3Object();
+		  S3.saveVideo2DB(VideoService,"2018-12-2");
 		  
-		
-		  S3.saveVideo2DB(VideoService,"2018-12-04");
-
-		
-		
-		
+		  
+		  
+		  
+		 
 		//生成card 存入数据库，并写入文件当中		
 //		List<Card> list = CardUtil.createCard(0.25);
 //

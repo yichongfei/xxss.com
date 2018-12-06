@@ -27,10 +27,10 @@ public class PayUtil {
 	public static final Map<String,Integer> vipType = new HashMap<String,Integer>();
 	
 	static {
-		vipType.put("1", 10);
-		vipType.put("3", 10);
-		vipType.put("6", 10);
-		vipType.put("12", 10);
+		vipType.put("1", 58);
+		vipType.put("3", 138);
+		vipType.put("6", 238);
+		vipType.put("12", 365);
 	}
 	
 	
