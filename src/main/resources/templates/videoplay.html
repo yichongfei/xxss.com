@@ -19,6 +19,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
 </head>
 <body>
+<input type="hidden" id="hiddenaccount" th:value=${session.account.email}>
 <div class="off-canvas-wrapper">
     <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
         <!--header-->
@@ -418,7 +419,6 @@
 <script type="text/javascript">
     var url = window.location.href;
 	var id = url.split("id=")[1];
-	
 	function loadVideo(videourl){
 		if(jQuery('#videojs').length > 0){
     		console.log(videourl)
@@ -447,6 +447,7 @@
 	}
 	
 	 jQuery(document).ready(function(jQuery){
+		 	var hiddenaccount = jQuery("#hiddenaccount").val()
 	    	//播放页面视频演示  	
 	    	var videourl ;
 	    	jQuery.ajax({
@@ -456,8 +457,15 @@
 	    		},
 	    		success : function(data) {
 	    			if(data.success==false){
-	    				alert(data.information);
-	    				return
+	    				debugger;
+	    				if(hiddenaccount=="游客"){
+	    					alert(data.information);
+	    					window.location.href="/login-register"
+	    				}else{
+	    					alert(data.information);
+	    					window.location.href="/chongzhi"
+	    				}
+	    				
 	    			}else{
 	    				videourl=data.object.preUrl;
 		    			jQuery("#playcontent").append('<video id="videojs" class="video-js vjs-polyzor-skin vjs-big-play-centered"  playsinline data-setup="{}"></video>');

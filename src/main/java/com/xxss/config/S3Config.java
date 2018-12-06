@@ -11,7 +11,9 @@ public class S3Config {
 	
 	public static final String OWNER = "这里好玩不";
 	
-	public static final int playTimesForFree = 400;
+	public static final int playTimesWithOutAccount =1;
+	
+	public static final int playTimesForFree = 3;
 
 	public static final String[] KINDS = {"x-best201808/"};
 }

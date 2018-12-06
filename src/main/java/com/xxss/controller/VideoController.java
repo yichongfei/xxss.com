@@ -97,11 +97,24 @@ public class VideoController {
 
 		String addr = getIpAddr(request);
 		if (playTimes.containsKey(addr)) {
-			if (playTimes.get(addr) > S3Config.playTimesForFree) {
-				result.setSuccess(false);
-				result.setInformation("非会员每天只能播放"+S3Config.playTimesForFree+"个视频,会员可无限观看,请成为我们星辰吧的会员,谢谢您的支持");
-				return result;
+			
+			//如果是游客,每天只能播放一个
+			if(account.getEmail()=="游客") {
+				if (playTimes.get(addr) > S3Config.playTimesWithOutAccount) {
+					result.setSuccess(false);
+					result.setInformation("亲爱的您还没有注册,注册之后可以继续免费观看,谢谢您的合作,游客每天只能免费观看"+S3Config.playTimesWithOutAccount+"个视频哦!");
+					return result;
+				}
+			}else {
+				if (playTimes.get(addr) > S3Config.playTimesForFree) {
+					result.setSuccess(false);
+					result.setInformation("亲爱的,免费用户只能每天观看"+S3Config.playTimesForFree+"个视频,本站良心小站,赶紧成为我们的VIP,每天无限制观看,海量电影,尽情体验");
+					return result;
+				}
 			}
+			
+			
+			
 
 			Integer times = playTimes.get(addr) + 1;
 			playTimes.put(addr, times);
@@ -183,7 +196,7 @@ public class VideoController {
 	
 	
 	public static void main(String[] args) {
-		System.out.println(CloudFront.getPreUrl("xvideos/2018-11-21/Superb Mature Lady (rebecca moore) Like And Ride Huge Mamba Cock Stud mov-23 8 min/preview.mp4"));
+		System.out.println(CloudFront.getPreUrl("Adriana Chechik/xvideos.mp4"));
 		
 	}
 }
