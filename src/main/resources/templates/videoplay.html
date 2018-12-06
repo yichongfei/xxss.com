@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/jquery.kyco.easyshare.css">
     <link rel="stylesheet" href="css/responsive.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
 </head>
 <body>
 <input type="hidden" id="hiddenaccount" th:value=${session.account.email}>
@@ -25,13 +26,13 @@
         <!--header-->
         <div class="off-canvas position-left light-off-menu" id="offCanvas-responsive" data-off-canvas>
         		 <script type="text/javascript">
-                	$("#offCanvas-responsive").load("/mobileheader",function(){ jQuery(document).foundation();});
+                	jQuery("#offCanvas-responsive").load("/mobileheader",function(){ jQuery(document).foundation();});
                 </script>
           </div>
           <div class="off-canvas-content" data-off-canvas-content>
 	            <header id="header">
 	                <script type="text/javascript">
-	                	$("#header").load("/header",function(){ jQuery(document).foundation();});
+	                jQuery("#header").load("/header",function(){ jQuery(document).foundation();});
 	                </script>
 	            </header><!-- End Header -->
             <div class="row" style="margin-top:10px;">
@@ -405,7 +406,6 @@
 <script src="/commanjs/account.js"></script>
 <script src="/commanjs/util.js"></script>
 <script src="bower_components/what-input/what-input.js"></script>
-<script src="bower_components/foundation-sites/dist/foundation.js"></script>
 <script src="js/jquery.showmore.src.js" type="text/javascript"></script>
 <script src="js/video.js"></script>
 <script src="js/app.js"></script>
