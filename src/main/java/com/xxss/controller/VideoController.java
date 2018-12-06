@@ -25,8 +25,10 @@ import com.xxss.aws.s3.AmazonS3Object;
 import com.xxss.config.S3Config;
 import com.xxss.dao.AccountService;
 import com.xxss.dao.CardService;
+import com.xxss.dao.PayService;
 import com.xxss.dao.VideoService;
 import com.xxss.entity.Account;
+import com.xxss.entity.Pay;
 import com.xxss.entity.Result;
 import com.xxss.entity.Video;
 
@@ -41,13 +43,15 @@ public class VideoController {
 	@Autowired
 	private  CardService cardService;
 	
-	
+	@Autowired
+	private PayService payService;
 	
 	//每播放一次记录IP
 	private static ConcurrentHashMap<String, Integer> playTimes = new ConcurrentHashMap<String, Integer>();
 	
 	private static ConcurrentHashMap<String, Video> videoCache = new ConcurrentHashMap<String,Video>();
 	
+	public static ConcurrentHashMap<String, Long> accountCache = new ConcurrentHashMap<String,Long>();
 	
 	public static long dayEnd = getEndTime();
 	
@@ -78,6 +82,13 @@ public class VideoController {
 	@RequestMapping("/video/getVideo")
 	@ResponseBody
 	public Result getVideoUrl(String id,HttpServletRequest request) {
+		//如果account缓存是空,则更新
+		if(accountCache.size()==0) {
+			getAllAccount();
+		}
+		String addr = getIpAddr(request);
+		
+		
 		HttpSession session = request.getSession();
 		Account account = (Account) session.getAttribute("account");
 		Result result = new Result();
@@ -85,7 +96,7 @@ public class VideoController {
 		String preSignedURL = CloudFront.getPreUrl(video.getMp4Key());
 		video.setPreUrl(preSignedURL);
 		//会员观看不限制次数
-		if (account != null && account.getVipDeadline() > System.currentTimeMillis()) {
+		if (account != null &&account.getEmail()!="游客"&& accountCache.get(account.getEmail()) > System.currentTimeMillis()) {
 			result.setObject(video);
 			result.setSuccess(true);
 			return result;
@@ -95,7 +106,7 @@ public class VideoController {
 			resetPlayTimes();// 每天重置播放次数记录数据
 		}
 
-		String addr = getIpAddr(request);
+		
 		if (playTimes.containsKey(addr)) {
 			
 			//如果是游客,每天只能播放一个
@@ -112,10 +123,6 @@ public class VideoController {
 					return result;
 				}
 			}
-			
-			
-			
-
 			Integer times = playTimes.get(addr) + 1;
 			playTimes.put(addr, times);
 		} else {
@@ -193,6 +200,58 @@ public class VideoController {
 			videoCache.put(video.getId(), video);
 		}
 	}
+	
+	/**
+	 * 将所有的账号存入缓存当中
+	 */
+	private void getAllAccount() {
+		List<Account> findAll = accountService.findAll();
+		for (Account account : findAll) {
+			accountCache.put(account.getEmail(), account.getVipDeadline());
+		}
+	}
+	
+	
+	/**
+	 * 充值的回调函数,放这里了
+	 * @param merchant
+	 * @param qrtype
+	 * @param customno
+	 * @param sendtime
+	 * @param orderno
+	 * @param money
+	 * @param paytime
+	 * @param state
+	 * @param sign
+	 * @param request
+	 */
+	@RequestMapping("/chongzhi/result")
+	@ResponseBody
+	public void chongzhivipResult(String merchant,String qrtype,String customno,String sendtime,String orderno,String money,String paytime,String state,String sign, HttpServletRequest request) {
+		
+		System.out.println("merchant"+":"+merchant);
+		System.out.println("qrtype"+":"+qrtype);
+		System.out.println("customno"+":"+customno);
+		System.out.println("sendtime"+":"+sendtime);
+		System.out.println("orderno"+":"+orderno);
+		System.out.println("money"+":"+money);
+		System.out.println("paytime"+":"+paytime);
+		System.out.println("state"+":"+state);
+		System.out.println("sign"+":"+sign);
+		
+		Pay pay = payService.findByid(customno);
+		Account account = accountService.findByemail(pay.getEmail());
+		account.updateVip(pay);
+		//数据库内容更新
+		accountService.saveAndFlush(account);
+		//更新缓存
+		accountCache.put(account.getEmail(), account.getVipDeadline());
+		
+		System.out.println("更新成功");
+	}
+	
+	
+	
 	
 	
 	public static void main(String[] args) {

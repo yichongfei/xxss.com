@@ -84,9 +84,11 @@ public class AccountController {
 		Account findByemail = accountService.findByemail(email);
 		
 		if (findByemail == null) {
-			accountService.save(new Account(email, password));
+			Account account = new Account(email, password);
+			accountService.save(account);
 			result.setSuccess(true);
 			result.setInformation("注册成功");
+			VideoController.accountCache.put(account.getEmail(), account.getVipDeadline());
 			return result;
 		} else {
 			result.setSuccess(false);
@@ -209,27 +211,7 @@ public class AccountController {
 
 	}
 	
-	@RequestMapping("/chongzhi/result")
-	@ResponseBody
-	public void chongzhivipResult(String merchant,String qrtype,String customno,String sendtime,String orderno,String money,String paytime,String state,String sign, HttpServletRequest request) {
-		
-		System.out.println("merchant"+":"+merchant);
-		System.out.println("qrtype"+":"+qrtype);
-		System.out.println("customno"+":"+customno);
-		System.out.println("sendtime"+":"+sendtime);
-		System.out.println("orderno"+":"+orderno);
-		System.out.println("money"+":"+money);
-		System.out.println("paytime"+":"+paytime);
-		System.out.println("state"+":"+state);
-		System.out.println("sign"+":"+sign);
-		
-		Pay pay = payService.findByid(customno);
-		Account account = accountService.findByemail(pay.getEmail());
-		account.updateVip(pay);
-		accountService.saveAndFlush(account);
-		
-		System.out.println("更新成功");
-	}
+	
 	
 	
 	
