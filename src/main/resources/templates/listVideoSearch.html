@@ -1,0 +1,481 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeTube video</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/video.css">
+    <link rel="stylesheet" href="/css/videoSkin.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/layerslider/css/layerslider.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/foundation-sites/dist/foundation.js"></script>
+	<link href="/css/jquery.pagination.css" rel="stylesheet" type="text/css"></link>
+	<!--start-smoth-scrolling-->
+	<script src="/js/jquery.pagination.min.js"></script>
+	<style>
+	[type='text']{
+		display: inline-block;
+	}
+	</style>
+	<script type="text/javascript">
+	jQuery(function(){
+		var count = jQuery('#countvideos').attr('count');
+		var curpage = jQuery('#curpage').attr('curpage')*1+1;
+		var videotype = jQuery('#videotype').attr('videotype');
+		var pageCount = Math.ceil(count / 12);
+		var title =jQuery("#searchtitle").attr('search');
+		$("#pagination3").pagination({
+			currentPage: curpage,
+			totalPage: pageCount,
+			isShow: true,
+			count: 3,
+			homePageText: "首页",
+			endPageText: "尾页",
+			prevPageText: "上一页",
+			nextPageText: "下一页",
+			callback: function(current) {
+				window.location.href = "/video/search/"+(current*1-1)+"?title="+title;
+			}
+		});
+		$(".videoUpLoadTime").each(function(){
+			$(this).html(new Date($(this).attr('longtime')*1).format('yyyy-MM-dd'));
+		});
+	});
+	</script>
+</head>
+<body>
+<div style="display: none" id="countvideos" th:attr="count=${count}"></div>
+<div style="display: none" id="curpage" th:attr="curpage=${curpage}"></div>
+<div style="display: none" id="videotype" th:attr="videotype=${name}"></div>
+<div style="display: none" id="searchtitle" th:attr="search=${search}"></div>
+<div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <!--header-->
+        <div class="off-canvas position-left light-off-menu" id="offCanvas-responsive" data-off-canvas>
+        		 <script type="text/javascript">
+        		 jQuery("#offCanvas-responsive").load("/mobileheader",function(){ jQuery(document).foundation();});
+                </script>
+          </div>
+          <div class="off-canvas-content" data-off-canvas-content>
+	            <header id="header">
+	                <script type="text/javascript">
+	                jQuery("#header").load("/header",function(){ jQuery(document).foundation();});
+	                </script>
+	            </header><!-- End Header -->
+            <!--breadcrumbs-->
+            <section id="breadcrumb">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <nav aria-label="You are here:" role="navigation">
+                            <ul class="breadcrumbs">
+                                <li><i class="fa fa-home"></i><a href="/">主页</a></li>
+                                <li>
+                                    <span class="show-for-sr">Current: </span> 视频分类
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </section><!--end breadcrumbs-->
+            <!-- Premium Videos -->
+             <section id="premium">
+            	<script type="text/javascript">
+            	jQuery("#premium").load("/fenleidh",function(){ jQuery(document).foundation();});
+            	</script>
+            </section>
+            <section class="category-content">
+                <div class="row">
+                    <!-- left side content area -->
+                    <div class="large-8 columns">
+                        <section class="content content-with-sidebar">
+                            <!-- newest video -->
+                            <div class="main-heading removeMargin">
+                                <div class="row secBg padding-14 removeBorderBottom">
+                                    <div class="medium-8 small-8 columns">
+                                        <div class="head-title">
+                                            <i class="fa fa-film">  搜索结果</i>
+                                            <h4 th:text="${search}"></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row secBg">
+                                <div class="large-12 columns">
+                                    <div class="row column head-text clearfix" style="font-weight: bold;">
+                                        <p class="pull-left">找到了相关视频总数 : <p th:text="${count}" ></p></p>
+                                        <div class="grid-system pull-right show-for-large">
+                                            <a class="secondary-button grid-default" href="#"><i class="fa fa-th"></i></a>
+                                            <a class="secondary-button current grid-medium" href="#"><i class="fa fa-th-large"></i></a>
+                                            <a class="secondary-button list" href="#"><i class="fa fa-th-list"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="tabs-content" data-tabs-content="newVideos">
+                                        <div class="tabs-panel is-active" id="new-all">
+                                            <div class="row list-group">
+                                            	<div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${videos}">
+                                        <div class="post thumb-border">
+                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
+                                                <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
+                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+						                        </a>
+                                                <div class="video-stats clearfix">
+                                                </div>
+                                            </div>
+                                            <div class="post-des" >
+                                                <h6><a href="javascript:void(0)" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <div class="post-stats clearfix">
+                                                    <p class="pull-left">
+                                                        <i class="fa fa-user"></i>
+                                                        <span><a href="#" th:text=${video.owner}></a></span>
+                                                    </p>
+                                                    <p class="pull-left">
+                                                        <i class="fa fa-clock-o"></i>
+                                                        <span class="videoUpLoadTime" th:attr="longtime=${video.uploadTime}" ></span>
+                                                    </p>
+                                                    <p class="pull-left">
+                                                        <i class="fa fa-eye" th:text=${video.playTimes}></i>
+                                                        <span ><span>
+                                                    </p>
+                                                </div>
+                                                <div class="post-summary">
+                                                    <p>请记住本站永久域名 www.xxxx.com 每日更新各种最新视频,谢谢合作</p>
+                                                </div>
+                                                <div class="post-button">
+                                                    <a href="javascript:void(0)" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                            </div>
+                                            <div id="pagination3"></div>
+                                        </div>
+                                        <div class="tabs-panel" id="new-hd">
+                                            <div class="row list-group">
+                                                <div class="item large-4 medium-6 columns grid-medium">
+                                                    <div class="post thumb-border">
+                                                        <div class="post-thumb">
+                                                            <img src="http://placehold.it/370x220" alt="new video">
+                                                            <a href="single-video-v2.html" class="hover-posts">
+                                                                <span><i class="fa fa-play"></i>Watch Video</span>
+                                                            </a>
+                                                            <div class="video-stats clearfix">
+                                                                <div class="thumb-stats pull-left">
+                                                                    <h6>HD</h6>
+                                                                </div>
+                                                                <div class="thumb-stats pull-left">
+                                                                    <i class="fa fa-heart"></i>
+                                                                    <span>506</span>
+                                                                </div>
+                                                                <div class="thumb-stats pull-right">
+                                                                    <span>05:56</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-des">
+                                                            <h6><a href="single-video-v2.html">There are many variations of passage.</a></h6>
+                                                            <div class="post-stats clearfix">
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <span><a href="#">admin</a></span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>5 January 16</span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-eye"></i>
+                                                                    <span>1,862K</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="post-summary">
+                                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto sequi nesciunt.</p>
+                                                            </div>
+                                                            <div class="post-button">
+                                                                <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item large-4 medium-6 columns grid-medium">
+                                                    <div class="post thumb-border">
+                                                        <div class="post-thumb">
+                                                            <img src="http://placehold.it/370x220" alt="new video">
+                                                            <a href="single-video-v2.html" class="hover-posts">
+                                                                <span><i class="fa fa-play"></i>Watch Video</span>
+                                                            </a>
+                                                            <div class="video-stats clearfix">
+                                                                <div class="thumb-stats pull-left">
+                                                                    <h6>HD</h6>
+                                                                </div>
+                                                                <div class="thumb-stats pull-left">
+                                                                    <i class="fa fa-heart"></i>
+                                                                    <span>506</span>
+                                                                </div>
+                                                                <div class="thumb-stats pull-right">
+                                                                    <span>05:56</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-des">
+                                                            <h6><a href="single-video-v2.html">There are many variations of passage.</a></h6>
+                                                            <div class="post-stats clearfix">
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <span><a href="#">admin</a></span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>5 January 16</span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-eye"></i>
+                                                                    <span>1,862K</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="post-summary">
+                                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto sequi nesciunt.</p>
+                                                            </div>
+                                                            <div class="post-button">
+                                                                <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item large-4 medium-6 columns grid-medium">
+                                                    <div class="post thumb-border">
+                                                        <div class="post-thumb">
+                                                            <img src="http://placehold.it/370x220" alt="new video">
+                                                            <a href="single-video-v2.html" class="hover-posts">
+                                                                <span><i class="fa fa-play"></i>Watch Video</span>
+                                                            </a>
+                                                            <div class="video-stats clearfix">
+                                                                <div class="thumb-stats pull-left">
+                                                                    <h6>HD</h6>
+                                                                </div>
+                                                                <div class="thumb-stats pull-left">
+                                                                    <i class="fa fa-heart"></i>
+                                                                    <span>506</span>
+                                                                </div>
+                                                                <div class="thumb-stats pull-right">
+                                                                    <span>05:56</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-des">
+                                                            <h6><a href="single-video-v2.html">There are many variations of passage.</a></h6>
+                                                            <div class="post-stats clearfix">
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <span><a href="#">admin</a></span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>5 January 16</span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-eye"></i>
+                                                                    <span>1,862K</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="post-summary">
+                                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto sequi nesciunt.</p>
+                                                            </div>
+                                                            <div class="post-button">
+                                                                <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item large-4 medium-6 columns grid-medium">
+                                                    <div class="post thumb-border">
+                                                        <div class="post-thumb">
+                                                            <img src="http://placehold.it/370x220" alt="new video">
+                                                            <a href="single-video-v2.html" class="hover-posts">
+                                                                <span><i class="fa fa-play"></i>Watch Video</span>
+                                                            </a>
+                                                            <div class="video-stats clearfix">
+                                                                <div class="thumb-stats pull-left">
+                                                                    <h6>HD</h6>
+                                                                </div>
+                                                                <div class="thumb-stats pull-left">
+                                                                    <i class="fa fa-heart"></i>
+                                                                    <span>506</span>
+                                                                </div>
+                                                                <div class="thumb-stats pull-right">
+                                                                    <span>05:56</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-des">
+                                                            <h6><a href="single-video-v2.html">There are many variations of passage.</a></h6>
+                                                            <div class="post-stats clearfix">
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <span><a href="#">admin</a></span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>5 January 16</span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-eye"></i>
+                                                                    <span>1,862K</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="post-summary">
+                                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto sequi nesciunt.</p>
+                                                            </div>
+                                                            <div class="post-button">
+                                                                <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item large-4 medium-6 columns grid-medium end">
+                                                    <div class="post thumb-border">
+                                                        <div class="post-thumb">
+                                                            <img src="http://placehold.it/370x220" alt="new video">
+                                                            <a href="single-video-v2.html" class="hover-posts">
+                                                                <span><i class="fa fa-play"></i>Watch Video</span>
+                                                            </a>
+                                                            <div class="video-stats clearfix">
+                                                                <div class="thumb-stats pull-left">
+                                                                    <h6>HD</h6>
+                                                                </div>
+                                                                <div class="thumb-stats pull-left">
+                                                                    <i class="fa fa-heart"></i>
+                                                                    <span>506</span>
+                                                                </div>
+                                                                <div class="thumb-stats pull-right">
+                                                                    <span>05:56</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-des">
+                                                            <h6><a href="single-video-v2.html">There are many variations of passage.</a></h6>
+                                                            <div class="post-stats clearfix">
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <span><a href="#">admin</a></span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>5 January 16</span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-eye"></i>
+                                                                    <span>1,862K</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="post-summary">
+                                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto sequi nesciunt.</p>
+                                                            </div>
+                                                            <div class="post-button">
+                                                                <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="item large-4 medium-6 columns grid-medium end">
+                                                    <div class="post thumb-border">
+                                                        <div class="post-thumb">
+                                                            <img src="http://placehold.it/370x220" alt="new video">
+                                                            <a href="single-video-v2.html" class="hover-posts">
+                                                                <span><i class="fa fa-play"></i>Watch Video</span>
+                                                            </a>
+                                                            <div class="video-stats clearfix">
+                                                                <div class="thumb-stats pull-left">
+                                                                    <h6>HD</h6>
+                                                                </div>
+                                                                <div class="thumb-stats pull-left">
+                                                                    <i class="fa fa-heart"></i>
+                                                                    <span>506</span>
+                                                                </div>
+                                                                <div class="thumb-stats pull-right">
+                                                                    <span>05:56</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-des">
+                                                            <h6><a href="single-video-v2.html">There are many variations of passage.</a></h6>
+                                                            <div class="post-stats clearfix">
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <span><a href="#">admin</a></span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-clock-o"></i>
+                                                                    <span>5 January 16</span>
+                                                                </p>
+                                                                <p class="pull-left">
+                                                                    <i class="fa fa-eye"></i>
+                                                                    <span>1,862K</span>
+                                                                </p>
+                                                            </div>
+                                                            <div class="post-summary">
+                                                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto sequi nesciunt.</p>
+                                                            </div>
+                                                            <div class="post-button">
+                                                                <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </section>
+                        <!-- ad Section -->
+                        <!-- <div class="googleAdv">
+                            <a href="#"><img src="/images/goodleadv.png" alt="googel ads"></a>
+                        </div>End ad Section -->
+                    </div><!-- end left side content area -->
+                    <!-- sidebar -->
+                    <div class="large-4 columns" id="rightaside">
+                        <script type="text/javascript">
+		        		 jQuery("#rightaside").load("/rightaside",function(){ jQuery(document).foundation();});
+		                </script>
+                    </div><!-- end sidebar -->
+                </div>
+            </section><!-- End Category Content-->
+            <!-- footer -->
+             <footer id="footer">
+            	<script type="text/javascript">
+        		 jQuery("#footer").load("/footer",function(){ jQuery(document).foundation();});
+                </script>
+            </footer>
+        </div><!--end off canvas content-->
+    </div><!--end off canvas wrapper inner-->
+</div><!--end off canvas wrapper-->
+<!-- script files -->
+<script src="/commanjs/account.js"></script>
+<script src="/commanjs/util.js"></script>
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/what-input/what-input.js"></script>
+<script src="/bower_components/foundation-sites/dist/foundation.js"></script>
+<script src="/js/jquery.showmore.src.js" type="text/javascript"></script>
+<script src="/js/app.js"></script>
+<script src="/js/video.js"></script>
+<script src="/layerslider/js/greensock.js" type="text/javascript"></script>
+<!-- LayerSlider script files -->
+<script src="/layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
+<script src="/layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/inewsticker.js" type="text/javascript"></script>
+<script src="/js/jquery.kyco.easyshare.js" type="text/javascript"></script>
+</body>
+</html>

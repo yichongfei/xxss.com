@@ -2047,7 +2047,7 @@ footer {
         .light-off-menu .off-social a:hover i {
           color: #fff; }
   .light-off-menu .responsive-search {
-    padding: 0 10px; }
+    padding: 10px 10px; }
     .light-off-menu .responsive-search input {
       color: #6c6c6c;
       font-size: 13px;
