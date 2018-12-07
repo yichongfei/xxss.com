@@ -101,15 +101,15 @@
                                     <div class="medium-8 small-8 columns">
                                         <div class="head-title">
                                             <i class="fa fa-film"></i>
-                                            <h4>分类视频精选</h4>
+                                            <h4>最热门的视频</h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row secBg">
                                 <div class="large-12 columns">
-                                    <div class="row column head-text clearfix">
-                                        <p class="pull-left">All Videos : <span>1,862 Videos posted</span></p>
+                                    <div class="row column head-text clearfix" style="font-weight: bold;">
+                                        <p class="pull-left">共有视频 <span th:text="${count}"></span></p>
                                         <div class="grid-system pull-right show-for-large">
                                             <a class="secondary-button grid-default" href="#"><i class="fa fa-th"></i></a>
                                             <a class="secondary-button current grid-medium" href="#"><i class="fa fa-th-large"></i></a>
@@ -119,7 +119,7 @@
                                     <div class="tabs-content" data-tabs-content="newVideos">
                                         <div class="tabs-panel is-active" id="new-all">
                                             <div class="row list-group">
-                                            	<div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${videos}">
+                                            	<div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${videos}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -129,7 +129,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="javascript:void(0)" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" th:text=${#strings.abbreviate({video.title},18)}></a></h6>
+                                                <h6><a href="javascript:void(0)" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -437,9 +437,9 @@
                             </div>
                         </section>
                         <!-- ad Section -->
-                        <div class="googleAdv">
+                       <!--  <div class="googleAdv">
                             <a href="#"><img src="/images/goodleadv.png" alt="googel ads"></a>
-                        </div><!-- End ad Section -->
+                        </div>End ad Section -->
                     </div><!-- end left side content area -->
                     <!-- sidebar -->
                      <div class="large-4 columns" id="rightaside">

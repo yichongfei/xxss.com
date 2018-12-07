@@ -191,6 +191,29 @@ public class VideoController {
 		}
 	}
 	
+	
+	/**
+	 * 根据video名字查找title
+	 */
+	@RequestMapping("/video/search/{page}")
+	public String searcheVideo(String title,Model model,@PathVariable(value = "page") Integer page) {
+		Sort sort = new Sort(Direction.DESC, "playTimes");
+		Pageable pageable = new PageRequest(page, 12, sort);
+		Page<Video> list = videoService.findBytitleLike("%"+title+"%",pageable);
+		int count =videoService.getCountByTitleLike("%"+title+"%");
+		
+		model.addAttribute("count", count);
+		model.addAttribute("videos", list);
+		model.addAttribute("countpage", list.getTotalPages());
+		model.addAttribute("curpage", page);
+		model.addAttribute("search",title);
+		return "listVideoSearch";
+	}
+	
+	
+	
+	
+	
 	/**
 	 * 将所有的视频文件放入缓存
 	 */

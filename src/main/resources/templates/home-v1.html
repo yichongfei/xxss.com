@@ -97,7 +97,7 @@
                         <div class="tabs-content" data-tabs-content="newVideos">
                             <div class="tabs-panel is-active" id="new-all">
                                 <div class="row list-group">
-                                    <div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${xzhubo}">
+                                    <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xzhubo}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -107,7 +107,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -169,7 +169,7 @@
                         <div class="tabs-content" data-tabs-content="newVideos">
                             <div class="tabs-panel is-active" id="new-all">
                                 <div class="row list-group">
-                                    <div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${xloli}">
+                                    <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xloli}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -179,7 +179,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -238,7 +238,7 @@
                         <div class="tabs-content" data-tabs-content="newVideos">
                             <div class="tabs-panel is-active" id="new-all">
                                 <div class="row list-group">
-                                    <div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${xchina}">
+                                    <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xchina}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -248,7 +248,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -307,7 +307,7 @@
                         <div class="tabs-content" data-tabs-content="newVideos">
                             <div class="tabs-panel is-active" id="new-all">
                                 <div class="row list-group">
-                                    <div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${xkorean}">
+                                    <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xkorean}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -317,7 +317,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -376,7 +376,7 @@
                         <div class="tabs-content" data-tabs-content="newVideos">
                             <div class="tabs-panel is-active" id="new-all">
                                 <div class="row list-group">
-                                    <div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${xteen}">
+                                    <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xteen}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -386,7 +386,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -447,7 +447,7 @@
                         <div class="tabs-content" data-tabs-content="newVideos">
                             <div class="tabs-panel is-active" id="new-all">
                                 <div class="row list-group">
-                                    <div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${xlama}">
+                                    <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xlama}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -457,7 +457,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -516,7 +516,7 @@
                         <div class="tabs-content" data-tabs-content="newVideos">
                             <div class="tabs-panel is-active" id="new-all">
                                 <div class="row list-group">
-                                    <div class="item large-3 medium-6 columns group-item-grid-default" th:each="video: ${xgangjiao}">
+                                    <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xgangjiao}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
                                                 <img alt="new video" th:src="@{http://dbkzdidw1ebxx.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
@@ -526,7 +526,7 @@
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},20)}></a></h6>
+                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -560,9 +560,9 @@
                 </div>
             </section>
             
-            <div class="googleAdv text-center">
+            <!-- <div class="googleAdv text-center">
                 <a href="#"><img src="images/goodleadv.png" alt="googel ads"></a>
-            </div><!-- End ad Section -->
+            </div>End ad Section -->
             <!-- footer -->
             <footer id="footer">
             	<script type="text/javascript">

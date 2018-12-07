@@ -276,6 +276,7 @@ public class IndexController {
 		model.addAttribute("videos", list);
 		model.addAttribute("count", videoService.getCountByCategory(category));
 		model.addAttribute("curpage", page);
+		model.addAttribute("category",category);
 		return "listVideo";
 	}
 	
@@ -415,7 +416,7 @@ public class IndexController {
 	public void updateIndexCache() {
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
 		Random rand = new Random();
-		int page =rand.nextInt(5) , size = 8;
+		int page =rand.nextInt(5) , size = 12;
 		Pageable pageable = new PageRequest(page, size, sort);
 		lolilist = videoService.findBycategory(pageable, "x-loli");
 		koreanlist = videoService.findBycategory(pageable, "x-korean");
