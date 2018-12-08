@@ -20,5 +20,5 @@ public class S3Config {
 			"x-shuangfei/","x-koujiao/","x-yanshe/","x-91dashen/","x-zhubo/","x-best201809/","x-best201811/","x-mote/","x-best201808/",
 			"x-oumeijuru/","x-xianggang/","x-wanghong/","x-chemo/","x-dongman/","x-mijian/"};
 	*/
-	public static final String[] KINDS = {"x-japanjuru/","x-youwu/","x-ruzhi/","x-japanteen/"};
+	public static final String[] KINDS = {"x-sancha/","x-heimeigui/","x-japanmother/"};
 }
