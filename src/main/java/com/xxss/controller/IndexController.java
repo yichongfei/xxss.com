@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xxss.dao.AccountService;
 import com.xxss.dao.CardService;
+import com.xxss.dao.PornStarService;
 import com.xxss.dao.VideoService;
 import com.xxss.entity.Account;
 import com.xxss.entity.Card;
+import com.xxss.entity.PornStar;
 import com.xxss.entity.Result;
 import com.xxss.entity.Video;
 
@@ -45,6 +47,9 @@ public class IndexController {
 
 	@Autowired
 	private CardService cardService;
+	
+	@Autowired
+	private PornStarService pornStarService;
 	
 	//缓存
 	private List<Video> mostViewVideoList = new ArrayList<Video>();
@@ -248,7 +253,31 @@ public class IndexController {
 		return "profile-settings";
 	}
 	
-	
+	/**
+	 * 根据分类查询女优列表
+	 * @param category
+	 * @param page
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/pornstar/{country}/{page}")
+	public String listPornstar(@PathVariable(value = "country") String country,
+			@PathVariable(value = "page") Integer page, Model model) {
+		if (country == null) {
+			model.addAttribute("name", "japan");
+		} else {
+			model.addAttribute("name", country);
+		}
+
+		Sort sort = new Sort(Direction.DESC, "pornStarName");
+		Pageable pageable = new PageRequest(page, 12, sort);
+		List<PornStar> list = pornStarService.findBycountry(pageable, country);
+		model.addAttribute("pornstars", list);
+		model.addAttribute("count", 100);
+		model.addAttribute("curpage", page);
+		model.addAttribute("category",country);
+		return "listPornstar";
+	}
 	
 	
 	

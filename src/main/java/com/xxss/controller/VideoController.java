@@ -26,6 +26,7 @@ import com.xxss.config.S3Config;
 import com.xxss.dao.AccountService;
 import com.xxss.dao.CardService;
 import com.xxss.dao.PayService;
+import com.xxss.dao.PornStarService;
 import com.xxss.dao.VideoService;
 import com.xxss.entity.Account;
 import com.xxss.entity.Pay;
@@ -45,6 +46,9 @@ public class VideoController {
 	
 	@Autowired
 	private PayService payService;
+	
+	@Autowired
+	private PornStarService pornStarService;
 	
 	//每播放一次记录IP
 	private static ConcurrentHashMap<String, Integer> playTimes = new ConcurrentHashMap<String, Integer>();
@@ -68,8 +72,16 @@ public class VideoController {
 		if(videoCache.size()==0) {
 			getAllVideo();
 		}
-		String preVideoUrl = CloudFront.getPreUrl(videoCache.get(id).getVideopreview());
-		return preVideoUrl;
+		
+		if(videoCache.get(id)!=null) {
+			String preVideoUrl = CloudFront.getPreUrl(videoCache.get(id).getVideopreview());
+			return preVideoUrl;
+		}else {
+			String preVideoUrl = CloudFront.getPreUrl(pornStarService.findById(id).getPreviewUrl());
+			return preVideoUrl;
+		}
+		
+		
 	}
 		
 	

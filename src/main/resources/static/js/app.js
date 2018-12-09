@@ -287,6 +287,12 @@ jQuery(document).ready(function(jQuery){
     	}
     }
     
+    function findpornstarmovie(element){
+    	var url = jQuery(element).find(".hover-posts").attr("href");
+    	window.location=url
+    }
+    
+    
     
     Date.prototype.format = function(format)
 	{

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.xxss.aws.s3.AmazonS3Object;
 import com.xxss.dao.CardService;
+import com.xxss.dao.PornStarService;
 import com.xxss.dao.VideoService;
 import com.xxss.entity.Card;
 import com.xxss.entity.Video;
@@ -52,15 +53,16 @@ public class SpringContext implements ApplicationContextAware {
 
 	public static void main(String[] args) throws Exception {
 		
-		//更新S3电影到数据库当中
+		 //更新S3电影到数据库当中
 		  ApplicationContext ctx = SpringApplication.run(Application.class, args);
 		  
 		  VideoService VideoService= ctx.getBean(VideoService.class);
+		  PornStarService ps = ctx.getBean(PornStarService.class);
 		  
 		  AmazonS3Object S3 = new AmazonS3Object();
-		  S3.saveVideo2DB(VideoService,"2018-12-08");
+		  //S3.saveVideo2DB(VideoService,"2018-12-09");
 		  
-		  
+		  S3.savePornstar2DB(ps, "2018-12-09");
 		  
 		  
 		 

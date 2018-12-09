@@ -30,7 +30,9 @@ import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.Upload;
 import com.xxss.config.S3Config;
+import com.xxss.dao.PornStarService;
 import com.xxss.dao.VideoService;
+import com.xxss.entity.PornStar;
 import com.xxss.entity.Video;
 
 public class AmazonS3Object {
@@ -200,6 +202,28 @@ public class AmazonS3Object {
 		}
 
 	}
+	
+	/**
+	 * 同步pornstar信息到数据库
+	 */
+	public static void savePornstar2DB(PornStarService PornStarService,String time) {
+		List<String> list = getPrefix(time);
+		for (String prefix : list) {
+			List<S3ObjectSummary> listObjectPrefix = ListObjectPrefix(S3Config.VIDEOBUCKET, prefix);
+			System.out.println(prefix);
+			List<S3ObjectSummary> mp4VideoS3Object = getpreMp4VideoS3Object(listObjectPrefix);
+
+			for (S3ObjectSummary s3ObjectSummary : mp4VideoS3Object) {
+				PornStarService.save(getPornStar(s3ObjectSummary));
+			}
+
+		}
+
+	}
+	
+	
+	
+	
 
 	/**
 	 * 获取所有的MP4S3Object
@@ -217,6 +241,28 @@ public class AmazonS3Object {
 		return mp4List;
 
 	}
+	
+	/**
+	 * 获取previewmp4
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static List<S3ObjectSummary> getpreMp4VideoS3Object(List<S3ObjectSummary> list) {
+		List<S3ObjectSummary> mp4List = new ArrayList<S3ObjectSummary>();
+		for (S3ObjectSummary s3ObjectSummary : list) {
+			if (s3ObjectSummary.getKey().endsWith("preview.mp4")) {
+				mp4List.add(s3ObjectSummary);
+			}
+		}
+		return mp4List;
+
+	}
+	
+	
+	
+	
+	
 
 	/**
 	 * 通过KEY 生成一个实例的VIDEO 对象
@@ -239,6 +285,29 @@ public class AmazonS3Object {
 		video.setOwner(S3Config.OWNER);
 		return video;
 	}
+	
+	
+	/**
+	 * 通过KEY 生成一个pornstar的对象
+	 * 
+	 * @param S3Object
+	 */
+	public static PornStar getPornStar(S3ObjectSummary S3Object) {
+
+		String key = S3Object.getKey();
+		PornStar star = new PornStar();
+		star.setId(UUID.randomUUID().toString());
+		star.setPreviewUrl(key);
+		star.setPicUrl(key.replace("preview.mp4", "1.jpg"));
+		star.setPornStarName(getVideoTitle(key));
+		star.setCountry("japan");
+		star.setUrl("/listVideo/x-"+star.getPornStarName()+"/0");
+		return star;
+	}
+	
+	
+	
+	
 
 	/**
 	 * 获取当天的视频URL前缀
