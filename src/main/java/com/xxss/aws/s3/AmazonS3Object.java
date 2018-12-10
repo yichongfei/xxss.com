@@ -300,7 +300,7 @@ public class AmazonS3Object {
 		star.setPreviewUrl(key);
 		star.setPicUrl(key.replace("preview.mp4", "1.jpg"));
 		star.setPornStarName(getVideoTitle(key));
-		star.setCountry("japan");
+		star.setCountry("america");
 		star.setUrl("/listVideo/x-"+star.getPornStarName()+"/0");
 		return star;
 	}
