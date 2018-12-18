@@ -364,7 +364,7 @@ public class IndexController {
 		model.addAttribute("mostviewVideos",mostViewVideoList);
 		model.addAttribute("videos", list);
 		model.addAttribute("video", video);
-		return "videoplay";
+		return "dpvideoplay";
 	}
 	
 	

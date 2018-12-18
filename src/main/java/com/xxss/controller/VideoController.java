@@ -30,6 +30,7 @@ import com.xxss.dao.PornStarService;
 import com.xxss.dao.VideoService;
 import com.xxss.entity.Account;
 import com.xxss.entity.Pay;
+import com.xxss.entity.PornStar;
 import com.xxss.entity.Result;
 import com.xxss.entity.Video;
 
@@ -55,6 +56,8 @@ public class VideoController {
 	
 	private static ConcurrentHashMap<String, Video> videoCache = new ConcurrentHashMap<String,Video>();
 	
+	private static ConcurrentHashMap<String, PornStar> pornStarCache = new ConcurrentHashMap<String,PornStar>();
+	
 	public static ConcurrentHashMap<String, Long> accountCache = new ConcurrentHashMap<String,Long>();
 	
 	public static long dayEnd = getEndTime();
@@ -69,15 +72,16 @@ public class VideoController {
 	@ResponseBody
 	public String getPreVideoUrl(String id,HttpServletRequest request) {
 		//如果缓存为空,则更新缓存
-		if(videoCache.size()==0) {
+		if(videoCache.size()==0||pornStarCache.size()==0) {
 			getAllVideo();
 		}
+		
 		
 		if(videoCache.get(id)!=null) {
 			String preVideoUrl = CloudFront.getPreUrl(videoCache.get(id).getVideopreview());
 			return preVideoUrl;
 		}else {
-			String preVideoUrl = CloudFront.getPreUrl(pornStarService.findById(id).getPreviewUrl());
+			String preVideoUrl = CloudFront.getPreUrl(pornStarCache.get(id).getPreviewUrl());
 			return preVideoUrl;
 		}
 		
@@ -230,9 +234,13 @@ public class VideoController {
 	 * 将所有的视频文件放入缓存
 	 */
 	private  void getAllVideo() {
-		List<Video> findAll = videoService.findAll();
-		for (Video video : findAll) {
+		List<Video> AllVideo = videoService.findAll();
+		for (Video video : AllVideo) {
 			videoCache.put(video.getId(), video);
+		}
+		List<PornStar> allPornstar = pornStarService.findAll();
+		for (PornStar pornStar : allPornstar) {
+			pornStarCache.put(pornStar.getId(), pornStar);
 		}
 	}
 	
