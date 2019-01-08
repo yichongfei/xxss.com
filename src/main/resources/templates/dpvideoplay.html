@@ -20,6 +20,16 @@
     <script src="dplayer/DPlayer.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <style type="text/css">
+    	#dplayer{
+    		height:432px;
+    	}
+    	@media screen and (max-width: 720px) {
+	    #dplayer{
+    		height:332px;
+    	}
+}
+    </style>
 </head>
 <body>
 <input type="hidden" id="hiddenaccount" th:value=${session.account.email}>
@@ -74,15 +84,16 @@
                                                     <span><i class="fa fa-commenting"></i>8</span>
                                                 </p>
                                             </div>
-                                            <div class="subscribe">
+                                            <!-- <div class="subscribe">
                                                 <form method="post">
                                                     <button type="submit" name="subscribe">Subscribe</button>
                                                 </form>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="social-share">
                                             <div class="post-like-btn clearfix">
                                                 <form method="post">
+                                                	<button type="button" id="switch" onclick="switchdanmu()">开启弹幕</button>
                                                     <button type="submit" name="fav"><i class="fa fa-heart"></i>Add to</button>
                                                 </form>
                                                 <a href="#" class="secondary-button"><i class="fa fa-thumbs-o-up"></i></a>
@@ -101,7 +112,7 @@
                         <div class="row secBg">
                             <div class="large-12 columns">
                                 <div class="heading">
-                                    <h5>Description</h5>
+                                    <h5>通知!</h5>
                                 </div>
                                 <div class="description showmore_one">
                                 	<p>欢迎光临本站,请记录本站域名以免失联,良心小站用心经营,成为VIP可无限观影,并且全站无广告,最清洁的体验,欢迎加入</p>
@@ -446,7 +457,14 @@
     		});
     	}
 	}
-	
+	var dp = new DPlayer({
+	    container: document.getElementById('dplayer'),
+	    screenshot: false,
+	    danmaku: {
+	        id: 'demo',
+	        api: 'https://api.prprpr.me/dplayer/'
+	    }
+	});
 	 jQuery(document).ready(function(jQuery){
 		 	var hiddenaccount = jQuery("#hiddenaccount").val()
 	    	//播放页面视频演示  	
@@ -468,17 +486,10 @@
 	    				
 	    			}else{
 	    				videourl=data.object.preUrl;
-	    				const dp = new DPlayer({
-	    				    container: document.getElementById('dplayer'),
-	    				    screenshot: false,
-	    				    video: {
-	    				        url: data.object.preUrl,
-	    				    },
-	    				    danmaku: {
-	    				        id: 'demo',
-	    				        api: 'https://api.prprpr.me/dplayer/'
-	    				    }
+	    				dp.switchVideo({
+	    				    url: videourl
 	    				});
+	    				
 	    			}
 	    			
 	    		}
@@ -500,7 +511,20 @@
  			jQuery(this).html(new Date(jQuery(this).attr('longtime')*1).format('yyyy-MM-dd'));
 	});
 	
-	
+	function switchdanmu(){
+		debugger;
+		var text = jQuery("#switch").text()
+		
+		if(text=="开启弹幕"){
+			dp.danmaku.show()
+			jQuery("#switch").text("关闭弹幕")
+		}else{
+			dp.danmaku.hide()
+			jQuery("#switch").text("开启弹幕")
+		}
+	}
+ 	
+ 	
     </script>
 </body>
 </html>

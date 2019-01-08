@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/jquery.kyco.easyshare.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/cropper.min.css">
+    <link rel="stylesheet" href="css/ImgCropping.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
     
 </head>
 <body>
@@ -25,14 +28,13 @@
         
        <div class="off-canvas position-left light-off-menu" id="offCanvas-responsive" data-off-canvas>
         		 <script type="text/javascript">
-                	$("#offCanvas-responsive").load("/mobileheader",function(){ jQuery(document).foundation();});
+                	jQuery("#offCanvas-responsive").load("/mobileheader",function(){ jQuery(document).foundation();});
                 </script>
           </div>
           <div class="off-canvas-content" data-off-canvas-content>
 	            <header id="header">
 	                <script type="text/javascript">
-	               		 debugger;
-	                	$("#header").load("/header",function(){ jQuery(document).foundation();});
+	                	jQuery("#header").load("/header",function(){ jQuery(document).foundation();});
 	                </script>
 	            </header><!-- End Header -->
             
@@ -42,10 +44,9 @@
                     <div class="large-12 columns">
                         <nav aria-label="You are here:" role="navigation">
                             <ul class="breadcrumbs">
-                                <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-                                <li><a href="profile-page-v2.html">profile</a></li>
+                                <li><i class="fa fa-home"></i><a href="index.html">主页</a></li>
                                 <li>
-                                    <span class="show-for-sr">Current: </span> profile setting
+                                    <span class="show-for-sr">Current: </span> 个人信息修改
                                 </li>
                             </ul>
                         </nav>
@@ -57,19 +58,13 @@
             <section class="topProfile topProfile-inner" style="background: url('images/profile-bg1.png') no-repeat;">
                 <div class="row">
                     <div class="large-12 columns">
-                        <div class="upload-bg">
-                            <form method="post">
-                                <label for="topfileupload" class="btn-upload"><i class="fa fa-camera"></i><span>update cover image</span></label>
-                                <input type="file" id="topfileupload" class="show-for-sr">
-                            </form>
-                        </div>
                     </div>
                 </div>
                 <div class="main-text">
                     <div class="row">
                         <div class="large-12 columns">
-                            <h3>World’s Biggest</h3>
-                            <h1>Powerfull Video Theme</h1>
+                            <h3>花无痕</h3>
+                            <h1>最用心的视频网站</h1>
                         </div>
                     </div>
                 </div>
@@ -77,33 +72,33 @@
                     <div class="row secBg">
                         <div class="large-12 columns">
                             <div class="profile-author-img">
-                                <img src="http://placehold.it/120x110" alt="profile author img">
+                                <img id="finalImg" th:attr="src=${session.account.picPath}" alt="profile author img">
                                 <form method="post">
-                                    <label for="imgfileupload" class="btn-upload"><i class="fa fa-camera"></i><span>update Avatar</span></label>
-                                    <input type="file" id="imgfileupload" class="show-for-sr">
+                                    <label for="imgfileupload" class="btn-upload" ><i class="fa fa-camera" id="replaceImg"></i><span>更改头像</span></label>
+                                    <input type="file"  class="show-for-sr">
                                 </form>
                             </div>
-                            <div class="profile-subscribe">
+                            <!-- <div class="profile-subscribe">
                                 <span><i class="fa fa-users"></i>6</span>
                                 <button type="submit" name="subscribe">subscribe</button>
-                            </div>
-                            <div class="profile-share">
+                            </div> -->
+                            <!-- <div class="profile-share">
                                 <div class="easy-share" data-easyshare data-easyshare-http data-easyshare-url="http://joinwebs.com">
-                                    <!-- Facebook -->
+                                    Facebook
                                     <button data-easyshare-button="facebook">
                                         <span class="fa fa-facebook"></span>
                                         <span>Share</span>
                                     </button>
                                     <span data-easyshare-button-count="facebook">0</span>
 
-                                    <!-- Twitter -->
+                                    Twitter
                                     <button data-easyshare-button="twitter" data-easyshare-tweet-text="">
                                         <span class="fa fa-twitter"></span>
                                         <span>Tweet</span>
                                     </button>
                                     <span data-easyshare-button-count="twitter">0</span>
 
-                                    <!-- Google+ -->
+                                    Google+
                                     <button data-easyshare-button="google">
                                         <span class="fa fa-google-plus"></span>
                                         <span>+1</span>
@@ -112,11 +107,11 @@
 
                                     <div data-easyshare-loader>Loading...</div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="clearfix">
                                 <div class="profile-author-name float-left">
-                                    <h4>Joseph John</h4>
-                                    <p>Join Date : <span>5 January 16</span></p>
+                                    <h4 th:text="${session.account.email}"></h4>
+                                    <p>加入时间 : <span id="registertime" th:attr="registertime=${session.account.registerTime}"></span></p>
                                 </div>
                                 <div class="profile-author-stats float-right">
                                     <ul class="menu">
@@ -199,7 +194,7 @@
                             <div class="large-12 columns">
                                 <div class="heading">
                                     <i class="fa fa-gears"></i>
-                                    <h4>profile Settings</h4>
+                                    <h4>个人信息中心</h4>
                                 </div>
                                 <div class="row">
                                     <div class="large-12 columns">
@@ -208,26 +203,26 @@
                                                 <div class="setting-form-inner">
                                                     <div class="row">
                                                         <div class="large-12 columns">
-                                                            <h6 class="borderBottom">Username Setting:</h6>
+                                                            <h6 class="borderBottom">用户信息修改:</h6>
                                                         </div>
                                                         <div class="medium-6 columns">
-                                                            <label>First Name:
-                                                                <input type="text" placeholder="enter your first name..">
+                                                            <label>账号:
+                                                                <input type="text" th:value="${session.account.email}" disabled="disabled">
                                                             </label>
                                                         </div>
                                                         <div class="medium-6 columns">
-                                                            <label>Last Name:
-                                                                <input type="text" placeholder="enter your last name..">
+                                                            <label>用户等级:
+                                                                <input type="text" th:value="${session.account.level}" disabled="disabled">
                                                             </label>
                                                         </div>
                                                         <div class="medium-6 columns">
-                                                            <label>Nick Name:
-                                                                <input type="text" placeholder="enter your nick name..">
+                                                            <label>用户经验
+                                                                <input type="text" th:value="${session.account.level}" disabled="disabled">
                                                             </label>
                                                         </div>
                                                         <div class="medium-6 columns">
-                                                            <label>Display Name:
-                                                                <input type="text" placeholder="select your display name">
+                                                            <label> 花无痕社区积分(积分可兑换会员,可观看收费视频)
+                                                                <input type="text" th:value="${session.account.token}" disabled="disabled">
                                                             </label>
                                                         </div>
                                                     </div>
@@ -235,16 +230,16 @@
                                                 <div class="setting-form-inner">
                                                     <div class="row">
                                                         <div class="large-12 columns">
-                                                            <h6 class="borderBottom">Update Password:</h6>
+                                                            <h6 class="borderBottom">修改密码:</h6>
                                                         </div>
                                                         <div class="medium-6 columns">
-                                                            <label>New Password:
-                                                                <input type="password" placeholder="enter your new password..">
+                                                            <label>最新密码:
+                                                                <input type="password" placeholder="请输入您的新密码..">
                                                             </label>
                                                         </div>
                                                         <div class="medium-6 columns">
-                                                            <label>Retype Password:
-                                                                <input type="password" placeholder="enter your new password..">
+                                                            <label>确认最新密码:
+                                                                <input type="password" placeholder="请再词确认您的新密码..">
                                                             </label>
                                                         </div>
                                                     </div>
@@ -277,53 +272,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="setting-form-inner">
-                                                    <div class="row">
-                                                        <div class="large-12 columns">
-                                                            <h6 class="borderBottom">Social Profile links:</h6>
-                                                        </div>
-                                                        <div class="medium-6 columns">
-                                                            <label>facebook:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                        <div class="medium-6 columns">
-                                                            <label>twitter:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                        <div class="medium-6 columns end">
-                                                            <label>Google Plus:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                        <div class="medium-6 columns">
-                                                            <label>Youtube:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                        <div class="medium-6 columns">
-                                                            <label>vimeo:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                        <div class="medium-6 columns end">
-                                                            <label>Pinterest:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                        <div class="medium-6 columns">
-                                                            <label>Instagram:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                        <div class="medium-6 columns end">
-                                                            <label>Linkedin:
-                                                                <input type="url" placeholder="enter your profile link..">
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="setting-form-inner">
                                                     <button class="button expanded" type="submit" name="setting">update now</button>
                                                 </div>
                                             </form>
@@ -346,9 +294,42 @@
         </div><!--end off canvas content-->
     </div><!--end off canvas wrapper inner-->
 </div><!--end off canvas wrapper-->
+<!--图片裁剪框 start-->
+<div style="display: none" class="tailoring-container">
+    <div class="black-cloth" onClick="closeTailor(this)"></div>
+    <div class="tailoring-content">
+            <div class="tailoring-content-one">
+                <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onChange="selectImg(this)">
+                    选择图片
+                </label>
+                <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
+            </div>
+            <div class="tailoring-content-two">
+                <div class="tailoring-box-parcel">
+                    <img id="tailoringImg">
+                </div>
+                <div class="preview-box-parcel">
+                    <p>图片预览：</p>
+                    <div class="square previewImg"></div>
+                    <div class="circular previewImg"></div>
+                </div>
+            </div>
+            <div class="tailoring-content-three">
+                <button class="l-btn cropper-reset-btn">复位</button>
+                <button class="l-btn cropper-rotate-btn">旋转</button>
+                <button class="l-btn cropper-scaleX-btn">换向</button>
+                <button class="l-btn sureCut" id="sureCut">确定</button>
+            </div>
+        </div>
+</div>
+<!--图片裁剪框 end-->
+
 <!-- script files -->
+<script src="/commanjs/util.js"></script>
+<script src="/commanjs/account.js"></script>
+<script type="text/javascript" src="js/cropper.min.js"></script>
 <script src="bower_components/what-input/what-input.js"></script>
-<script src="bower_components/foundation-sites/dist/foundation.js"></script>
 <script src="js/jquery.showmore.src.js" type="text/javascript"></script>
 <script src="js/app.js"></script>
 <script src="layerslider/js/greensock.js" type="text/javascript"></script>
@@ -358,5 +339,108 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/inewsticker.js" type="text/javascript"></script>
 <script src="js/jquery.kyco.easyshare.js" type="text/javascript"></script>
+<script type="text/javascript">
+//弹出框水平垂直居中
+(window.onresize = function () {
+    var win_height = jQuery(window).height();
+    var win_width = jQuery(window).width();
+    if (win_width <= 768){
+        jQuery(".tailoring-content").css({
+            "top": (win_height - jQuery(".tailoring-content").outerHeight())/2,
+            "left": 0
+        });
+    }else{
+        jQuery(".tailoring-content").css({
+            "top": (win_height - jQuery(".tailoring-content").outerHeight())/2,
+            "left": (win_width - jQuery(".tailoring-content").outerWidth())/2
+        });
+    }
+})();
+
+//弹出图片裁剪框
+jQuery("#replaceImg").on("click",function () {
+	console.log(123);
+    jQuery(".tailoring-container").toggle();
+});
+//图像上传
+function selectImg(file) {
+    if (!file.files || !file.files[0]){
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+        var replaceSrc = evt.target.result;
+        //更换cropper的图片
+        jQuery('#tailoringImg').cropper('replace', replaceSrc,false);//默认false，适应高度，不失真
+    }
+    reader.readAsDataURL(file.files[0]);
+}
+//cropper图片裁剪
+jQuery('#tailoringImg').cropper({
+    aspectRatio: 1/1,//默认比例
+    preview: '.previewImg',//预览视图
+    guides: false,  //裁剪框的虚线(九宫格)
+    autoCropArea: 0.5,  //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+    movable: false, //是否允许移动图片
+    dragCrop: true,  //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+    movable: true,  //是否允许移动剪裁框
+    resizable: true,  //是否允许改变裁剪框的大小
+    zoomable: false,  //是否允许缩放图片大小
+    mouseWheelZoom: false,  //是否允许通过鼠标滚轮来缩放图片
+    touchDragZoom: true,  //是否允许通过触摸移动来缩放图片
+    rotatable: true,  //是否允许旋转图片
+    crop: function(e) {
+        // 输出结果数据裁剪图像。
+    }
+});
+//旋转
+jQuery(".cropper-rotate-btn").on("click",function () {
+    jQuery('#tailoringImg').cropper("rotate", 45);
+});
+//复位
+jQuery(".cropper-reset-btn").on("click",function () {
+    jQuery('#tailoringImg').cropper("reset");
+});
+//换向
+var flagX = true;
+jQuery(".cropper-scaleX-btn").on("click",function () {
+    if(flagX){
+        jQuery('#tailoringImg').cropper("scaleX", -1);
+        flagX = false;
+    }else{
+        jQuery('#tailoringImg').cropper("scaleX", 1);
+        flagX = true;
+    }
+    flagX != flagX;
+});
+
+//裁剪后的处理
+jQuery("#sureCut").on("click",function () {
+    if (jQuery("#tailoringImg").attr("src") == null ){
+        return false;
+    }else{
+        var cas = jQuery('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
+        var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+        jQuery("#finalImg").prop("src",base64url);//显示为图片的形式
+        //关闭裁剪框
+        closeTailor();
+        console.log(base64url);
+        jQuery.ajax({
+        	url:"/account/updatePic",
+        	type:"post",
+        	dataType: 'JSON',  
+            cache: false,  
+        	data:{"base64url":base64url},
+        	success:function(){}
+        })
+        
+    }
+});
+//关闭裁剪框
+function closeTailor() {
+    jQuery(".tailoring-container").toggle();
+}
+
+</script>
 </body>
 </html>

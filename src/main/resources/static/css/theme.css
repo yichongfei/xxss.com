@@ -2715,11 +2715,11 @@ footer {
     .topProfile .profile-stats .secBg {
       padding: 18px 0; }
     .topProfile .profile-stats .profile-subscribe {
-      height: 40px;
-      line-height: 40px;
-      position: absolute;
-      top: -50px;
-      left: 20%; }
+	height: 40px;
+    line-height: 40px;
+    position: absolute;
+    top: 18px;
+    left: 35%; }
       .topProfile .profile-stats .profile-subscribe span {
         display: inline-block;
         padding: 0 15px;

@@ -17,7 +17,7 @@ public class CloudFront {
 	public static String getPreUrl(String s3ObjectKey) {
 		String preUrl;
 		try {
-			preUrl = CloudFrontUrlSigner.getSignedURLWithCannedPolicy(SignerUtils.Protocol.http, CloudFrontConfig.distributionDomain, new File(CloudFrontConfig.privateKeyFilePath), s3ObjectKey, "APKAI37IRC7HLOI6ALDQ", new Date(System.currentTimeMillis()+MoreThanDate));
+			preUrl = CloudFrontUrlSigner.getSignedURLWithCannedPolicy(SignerUtils.Protocol.https, CloudFrontConfig.distributionDomain, new File(CloudFrontConfig.privateKeyFilePath), s3ObjectKey, "APKAI37IRC7HLOI6ALDQ", new Date(System.currentTimeMillis()+MoreThanDate));
 			return preUrl;
 		} catch (InvalidKeySpecException e) {
 			// TODO Auto-generated catch block

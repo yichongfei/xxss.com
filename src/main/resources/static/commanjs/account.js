@@ -3,9 +3,7 @@ function register(){
 	var email = jQuery("#email").val();
 	var password = jQuery("#password").val();
 
-	if(isEmail(email)==false){
-		alert("请输入正确的邮箱格式");
-	}else{
+	
 		jQuery.ajax({
 			url:"/account/zhuce",
 			data:{"email":email,"password":password},
@@ -21,7 +19,6 @@ function register(){
 				}
 			}
 		});
-	}
 }
 
 //登录
@@ -166,6 +163,8 @@ function goRegister(){
 	window.location.href = "/login-register";
 }
 
+//注册时间格式化
+jQuery("#registertime").text(formatDateTime(jQuery("#registertime").attr("registertime")*1))
 
 
 

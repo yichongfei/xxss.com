@@ -76,7 +76,6 @@ public class VideoController {
 			getAllVideo();
 		}
 		
-		
 		if(videoCache.get(id)!=null) {
 			String preVideoUrl = CloudFront.getPreUrl(videoCache.get(id).getVideopreview());
 			return preVideoUrl;

@@ -34,13 +34,15 @@ public class Account {
 	
 	private String picPath; //头像路径
 	
-	private int money ;  //用户拥有的金钱
+	private int token ;  //用户的积分
+	
+	private int level ; //用户的等级
 	
 	private String description; //描述
 	
 	private int privilege;//权限, 0是普通权限,1是管理者权限
 	
-	private long registerTime;
+	private long registerTime;//注册时间
 	
 	private String superaccount;//超级会员
 	
@@ -55,6 +57,7 @@ public class Account {
 		this.vip = false;
 		this.tuiguangURL =creatTuiguangUrl(id)+"欢迎观看形形色色华人社区,最精彩,等你来";
 		this.registerTime = System.currentTimeMillis();
+		this.token=0;
 	}
 
 	/**
@@ -216,11 +219,11 @@ public class Account {
 	}
 
 	public int getMoney() {
-		return money;
+		return token;
 	}
 
-	public void setMoney(int money) {
-		this.money = money;
+	public void setMoney(int token) {
+		this.token = token;
 	}
 
 	public String getDescription() {
@@ -253,6 +256,22 @@ public class Account {
 
 	public void setSuperaccount(String superaccount) {
 		this.superaccount = superaccount;
+	}
+
+	public int getToken() {
+		return token;
+	}
+
+	public void setToken(int token) {
+		this.token = token;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	
