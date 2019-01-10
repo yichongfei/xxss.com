@@ -86,6 +86,24 @@ public class IndexController {
 		return "home-v1";
 	}
 	
+	@RequestMapping("/index")
+	public String daohang(Model model, HttpServletRequest request) {
+		
+		if(lolilist.size()==0||koreanlist.size()==0||chinalist.size()==0||gangjiaolist.size()==0||teenlist.size()==0||lamalist.size()==0) {
+			updateIndexCache();
+		}
+		model.addAttribute("xzhubo", zhubolist);
+		model.addAttribute("xloli", lolilist);
+		model.addAttribute("xkorean", koreanlist);
+		model.addAttribute("xchina", chinalist);
+		model.addAttribute("xgangjiao", gangjiaolist);
+		model.addAttribute("xteen", teenlist);
+		model.addAttribute("xlama", lamalist);
+		model.addAttribute("mostview", mostViewVideoList);
+		
+		return "index";
+	}
+	
 	
 	/**
 	 * 获取header
