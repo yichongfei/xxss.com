@@ -24,7 +24,7 @@ public class Application extends SpringBootServletInitializer implements Embedde
 	@Override
 	public void customize(ConfigurableEmbeddedServletContainer container) {
 
-		container.setPort(9999);
+		container.setPort(80);
 		
 	}
 	
