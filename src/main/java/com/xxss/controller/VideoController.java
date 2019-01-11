@@ -72,7 +72,6 @@ public class VideoController {
 	@ResponseBody
 	public String getPreVideoUrl(String id,HttpServletRequest request) {
 		//如果缓存为空,则更新缓存
-		System.out.println(123123);
 		if(videoCache.size()==0||pornStarCache.size()==0) {
 			getAllVideo();
 		}
