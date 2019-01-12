@@ -288,7 +288,7 @@ public class IndexController {
 		}
 
 		Sort sort = new Sort(Direction.DESC, "pornStarName");
-		Pageable pageable = new PageRequest(page, 12, sort);
+		Pageable pageable = new PageRequest(page, 6, sort);
 		List<PornStar> list = pornStarService.findBycountry(pageable, country);
 		model.addAttribute("pornstars", list);
 		model.addAttribute("count", 100);
@@ -318,7 +318,7 @@ public class IndexController {
 		}
 
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
-		Pageable pageable = new PageRequest(page, 12, sort);
+		Pageable pageable = new PageRequest(page, 6, sort);
 		List<Video> list = videoService.findBycategory(pageable, category);
 		model.addAttribute("videos", list);
 		model.addAttribute("count", videoService.getCountByCategory(category));
@@ -337,7 +337,7 @@ public class IndexController {
 	@RequestMapping("/listNewVideo/{page}")
 	public String listNewVideo(@PathVariable(value = "page") Integer page, Model model) {
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
-		Pageable pageable = new PageRequest(page, 12, sort);
+		Pageable pageable = new PageRequest(page, 6, sort);
 		Page<Video> list = videoService.findAll(pageable);
 		model.addAttribute("videos", list);
 		model.addAttribute("count", videoService.getCountRows());
@@ -354,7 +354,7 @@ public class IndexController {
 	@RequestMapping("/listHotVideo/{page}")
 	public String listHotVideo(@PathVariable(value = "page") Integer page, Model model) {
 		Sort sort = new Sort(Direction.DESC, "playTimes");
-		Pageable pageable = new PageRequest(page, 12, sort);
+		Pageable pageable = new PageRequest(page, 6, sort);
 		Page<Video> list = videoService.findAll(pageable);
 		model.addAttribute("count", videoService.getCountRows());
 		model.addAttribute("videos", list);
@@ -463,7 +463,7 @@ public class IndexController {
 	public void updateIndexCache() {
 		Sort sort = new Sort(Direction.DESC, "uploadTime");
 		Random rand = new Random();
-		int page =rand.nextInt(5) , size = 12;
+		int page =rand.nextInt(5) , size = 6;
 		Pageable pageable = new PageRequest(page, size, sort);
 		lolilist = videoService.findBycategory(pageable, "x-loli");
 		koreanlist = videoService.findBycategory(pageable, "x-korean");
