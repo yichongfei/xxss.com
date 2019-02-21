@@ -106,15 +106,15 @@
                                 <div class="row list-group">
                                     <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xzhubo}">
                                         <div class="post thumb-border">
-                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
+                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)"  >
                                                 <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
-                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                                <a  class="hover-posts" th:href="@{/goVideoPlay?(id=${video.id})}">
 						                        </a>
                                                 <div class="video-stats clearfix">
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <h6><a th:href="@{/goVideoPlay?(id=${video.id})}" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -130,7 +130,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="post-summary">
-                                                    <p>请记住本站永久域名 www.xxxx.com 每日更新各种最新视频,谢谢合作</p>
+                                                    <p>请记住本站永久域名 www.91xxss.com 每日更新各种最新视频,谢谢合作</p>
                                                 </div>
                                                 <div class="post-button">
                                                     <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
@@ -178,15 +178,15 @@
                                 <div class="row list-group">
                                     <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xloli}">
                                         <div class="post thumb-border">
-                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
+                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)"  >
                                                 <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
-                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                                <a  class="hover-posts" th:href="@{/goVideoPlay?(id=${video.id})}">
 						                        </a>
                                                 <div class="video-stats clearfix">
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <h6><a th:href="@{/goVideoPlay?(id=${video.id})}" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -202,7 +202,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="post-summary">
-                                                    <p>请记住本站永久域名 www.xxxx.com 每日更新各种最新视频,谢谢合作</p>
+                                                    <p>请记住本站永久域名 www.91xxss.com 每日更新各种最新视频,谢谢合作</p>
                                                 </div>
                                                 <div class="post-button">
                                                     <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
@@ -247,15 +247,15 @@
                                 <div class="row list-group">
                                     <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xchina}">
                                         <div class="post thumb-border">
-                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
+                                            <div class="post-thumb" th:attr="data-id=${video.id}"  onclick="goVideoPlay(this)" >
                                                 <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
-                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                                <a  class="hover-posts" th:href="@{/goVideoPlay?(id=${video.id})}">
 						                        </a>
                                                 <div class="video-stats clearfix">
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <h6><a th:href="@{/goVideoPlay?(id=${video.id})}" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -271,7 +271,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="post-summary">
-                                                    <p>请记住本站永久域名 www.xxxx.com 每日更新各种最新视频,谢谢合作</p>
+                                                    <p>请记住本站永久域名 www.91xxss.com 每日更新各种最新视频,谢谢合作</p>
                                                 </div>
                                                 <div class="post-button">
                                                     <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
@@ -316,15 +316,15 @@
                                 <div class="row list-group">
                                     <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xkorean}">
                                         <div class="post thumb-border">
-                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                            <div class="post-thumb"  th:attr="data-id=${video.id}"  onclick="goVideoPlay(this)">
                                                 <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
-                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                                 <a  class="hover-posts" th:href="@{/goVideoPlay?(id=${video.id})}">
 						                        </a>
                                                 <div class="video-stats clearfix">
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <h6><a th:href="@{/goVideoPlay?(id=${video.id})}" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -387,13 +387,13 @@
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
                                                 <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
-                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                                <a  class="hover-posts" th:href="@{/goVideoPlay?(id=${video.id})}">
 						                        </a>
                                                 <div class="video-stats clearfix">
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <h6><a th:href="@{/goVideoPlay?(id=${video.id})}" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -456,15 +456,15 @@
                                 <div class="row list-group">
                                     <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xlama}">
                                         <div class="post thumb-border">
-                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
                                                 <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
-                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                                <a  class="hover-posts" th:href="@{/goVideoPlay?(id=${video.id})}">
 						                        </a>
                                                 <div class="video-stats clearfix">
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <h6><a th:href="@{/goVideoPlay?(id=${video.id})}" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
@@ -480,7 +480,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="post-summary">
-                                                    <p>请记住本站永久域名 www.xxxx.com 每日更新各种最新视频,谢谢合作</p>
+                                                    <p>请记住本站永久域名 www.91xxss.com 每日更新各种最新视频,谢谢合作</p>
                                                 </div>
                                                 <div class="post-button">
                                                     <a href="single-video-v2.html" class="secondary-button"><i class="fa fa-play-circle"></i>watch video</a>
@@ -525,15 +525,15 @@
                                 <div class="row list-group">
                                     <div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="video: ${xgangjiao}">
                                         <div class="post thumb-border">
-                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                            <div class="post-thumb" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)" >
                                                 <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${video.picKey})}">
-                                                <a href="javascript:void(0);" class="hover-posts" th:attr="data-id=${video.id}" onclick="goVideoPlay(this)">
+                                                <a  class="hover-posts" th:href="@{/goVideoPlay?(id=${video.id})}">
 						                        </a>
                                                 <div class="video-stats clearfix">
                                                 </div>
                                             </div>
                                             <div class="post-des">
-                                                <h6><a href="/play" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
+                                                <h6><a th:href="@{/goVideoPlay?(id=${video.id})}" th:text=${#strings.abbreviate({video.title},45)}></a></h6>
                                                 <div class="post-stats clearfix">
                                                     <p class="pull-left">
                                                         <i class="fa fa-user"></i>
