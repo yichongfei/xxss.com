@@ -410,7 +410,7 @@ public class IndexController {
 	@RequestMapping("/chongzhi")
 	public String chongzhi(HttpServletRequest request) {
 
-		return "chongzhi";
+		return "chongzhicard";
 
 	}
 

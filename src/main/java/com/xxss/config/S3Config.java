@@ -11,7 +11,7 @@ public class S3Config {
 	
 	public static final String OWNER = "这里好玩不";
 	
-	public static final int playTimesWithOutAccount =100;
+	public static final int playTimesWithOutAccount =3;
 	
 	public static final int playTimesForFree = 3;
 	
