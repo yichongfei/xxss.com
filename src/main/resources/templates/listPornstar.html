@@ -10,7 +10,6 @@
 	<meta name="description" content="花无痕-花无痕av资源视频|风花雪月,花开无香,雪落无痕,一个有情怀的视频网站">
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/theme.css">
-    <link rel="stylesheet" href="/css/video.css">
     <link rel="stylesheet" href="/css/videoSkin.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
@@ -24,6 +23,8 @@
 	<link href="/css/jquery.pagination.css" rel="stylesheet" type="text/css"></link>
 	<!--start-smoth-scrolling-->
 	<script src="/js/jquery.pagination.min.js"></script>
+	<link href="https://cdn.bootcss.com/video.js/7.5.0/alt/video-js-cdn.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/video.js/7.5.0/alt/video.core.min.js"></script>
 	<style>
 	[type='text']{
 		display: inline-block;
@@ -126,7 +127,7 @@
                                             	<div class="item large-3 medium-6 columns group-item-secondary-button grid-medium" th:each="pornstar: ${pornstars}">
                                         <div class="post thumb-border">
                                             <div class="post-thumb" th:attr="data-id=${pornstar.id} "  onclick="findpornstarmovie(this)"   >
-                                                <img alt="new video" th:src="@{https://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${pornstar.picUrl})}">
+                                                <img alt="new video" th:src="@{http://dkxh721496qhs.cloudfront.net/{imgkey}(imgkey=${pornstar.picUrl})}">
                                                 <a th:href="${pornstar.url}" class="hover-posts" th:attr="data-id=${pornstar.id}" >
 						                        </a>
                                                 <div class="video-stats clearfix">
@@ -470,7 +471,6 @@
 <script src="/bower_components/foundation-sites/dist/foundation.js"></script>
 <script src="/js/jquery.showmore.src.js" type="text/javascript"></script>
 <script src="/js/app.js"></script>
-<script src="/js/video.js"></script>
 <script src="/layerslider/js/greensock.js" type="text/javascript"></script>
 <!-- LayerSlider script files -->
 <script src="/layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
